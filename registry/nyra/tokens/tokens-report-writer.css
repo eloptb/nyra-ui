@@ -1,0 +1,127 @@
+/* ============================================================
+   Nyra UI — Thème Report Writer
+   Usage : [data-theme="report-writer"]
+   Police : Raleway
+   Couleur primaire : Rouge/corail (#AA2B1D)
+   ============================================================ */
+
+[data-theme="report-writer"] {
+
+  /* ----------------------------------------------------------
+     FONT
+  ---------------------------------------------------------- */
+  --font-base: 'Raleway', system-ui, sans-serif;
+
+  /* ----------------------------------------------------------
+     PRIMITIVES — Primary (Rouge/Corail)
+  ---------------------------------------------------------- */
+  --primitive-primary-10:  #FBF4F4;
+  --primitive-primary-20:  #F6EAE9;
+  --primitive-primary-30:  #EDD2D0;
+  --primitive-primary-40:  #DDAAA5;
+  --primitive-primary-50:  #D08A83;
+  --primitive-primary-60:  #AA2B1D;
+  --primitive-primary-70:  #792016;
+  --primitive-primary-80:  #591912;
+  --primitive-primary-90:  #481510;
+  --primitive-primary-100: #280E0B;
+  --primitive-primary-110: #1B0806;
+
+  /* ----------------------------------------------------------
+     PRIMITIVES — Secondary (légèrement adapté)
+  ---------------------------------------------------------- */
+  --primitive-secondary-10:  #FEF9F7;
+  --primitive-secondary-20:  #FDF2EE;
+  --primitive-secondary-30:  #FBE4DC;
+  --primitive-secondary-40:  #F7CABC;
+  --primitive-secondary-50:  #FAB7A5;
+  --primitive-secondary-60:  #EC6A58;
+  --primitive-secondary-70:  #A74F40;
+  --primitive-secondary-80:  #7A4030;
+  --primitive-secondary-90:  #633227;
+  --primitive-secondary-100: #351A17;
+  --primitive-secondary-110: #351A17;
+
+  /* ----------------------------------------------------------
+     PRIMITIVES — Grey (légèrement chaud)
+  ---------------------------------------------------------- */
+  --primitive-grey-10:  #FAFAFA;
+  --primitive-grey-20:  #F6F5F4;
+  --primitive-grey-30:  #ECEAE8;
+  --primitive-grey-40:  #DAD7D4;
+  --primitive-grey-50:  #CBC5C1;
+  --primitive-grey-60:  #A39A93;
+  --primitive-grey-70:  #746E69;
+  --primitive-grey-80:  #55514D;
+  --primitive-grey-90:  #45423F;
+  --primitive-grey-100: #232323;
+  --primitive-grey-110: #0D0D10;
+
+  /* ----------------------------------------------------------
+     TOKENS SÉMANTIQUES — Fond
+  ---------------------------------------------------------- */
+  --color-bg-page:    #FFFFFF;
+  --color-bg-surface: #FAFAFA;
+  --color-bg-raised:  #FFFFFF;
+  --color-bg-overlay: rgba(27, 8, 6, 0.40);
+
+  /* ----------------------------------------------------------
+     TOKENS SÉMANTIQUES — Texte
+  ---------------------------------------------------------- */
+  --color-text-primary:    #1B0806;
+  --color-text-secondary:  #55514D;
+  --color-text-muted:      #A39A93;
+  --color-text-disabled:   #CBC5C1;
+  --color-text-inverse:    #FFFFFF;
+  --color-text-on-primary: #FFFFFF;
+
+  /* ----------------------------------------------------------
+     TOKENS SÉMANTIQUES — Interactif (Primary Rouge)
+  ---------------------------------------------------------- */
+  --color-interactive-default: #AA2B1D;
+  --color-interactive-hover:   #792016;
+  --color-interactive-active:  #591912;
+  --color-interactive-subtle:  #F6EAE9;
+  --color-interactive-muted:   #EDD2D0;
+
+  /* ----------------------------------------------------------
+     TOKENS SÉMANTIQUES — Accent
+  ---------------------------------------------------------- */
+  --color-accent-default: #EC6A58;
+  --color-accent-hover:   #A74F40;
+  --color-accent-active:  #7A4030;
+  --color-accent-subtle:  #FDF2EE;
+
+  /* ----------------------------------------------------------
+     TOKENS SÉMANTIQUES — Bordures
+  ---------------------------------------------------------- */
+  --color-border-default: #ECEAE8;
+  --color-border-strong:  #CBC5C1;
+  --color-border-focus:   #AA2B1D;
+  --color-border-error:   #FF3B2F;
+
+  /* ----------------------------------------------------------
+     TOKENS SÉMANTIQUES — États fonctionnels
+  ---------------------------------------------------------- */
+  --color-error:          #FF3B2F;
+  --color-error-subtle:   #FFF0EF;
+  --color-success:        #35C759;
+  --color-success-subtle: #EAF9EE;
+  --color-warning:        #FF9500;
+  --color-warning-subtle: #FFF4EA;
+  --color-info:           #AA2B1D;
+  --color-info-subtle:    #F6EAE9;
+
+  /* ----------------------------------------------------------
+     OMBRES
+  ---------------------------------------------------------- */
+  --shadow-sm: 0 1px 3px 0 rgba(170, 43, 29, 0.08);
+  --shadow-md: 0 4px 12px 0 rgba(170, 43, 29, 0.12);
+  --shadow-lg: 0 8px 24px 0 rgba(170, 43, 29, 0.16);
+  --shadow-xl: 0 16px 40px 0 rgba(170, 43, 29, 0.20);
+
+  --focus-ring-color: rgba(170, 43, 29, 0.30);
+
+  --gradient-brand: linear-gradient(135deg, #AA2B1D, #EC6A58);
+  --gradient-primary: linear-gradient(135deg, #EDD2D0, #AA2B1D);
+}

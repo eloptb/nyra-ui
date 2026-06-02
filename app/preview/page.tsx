@@ -1,275 +1,312 @@
 "use client";
 import { useState } from "react";
 
-const tokens = {
-  primary: "#1C5EFE",
-  primary20: "#E8EFFF",
-  primary30: "#CFDDFF",
-  primary70: "#1545BB",
-  secondary: "#EF476F",
-  secondary20: "#FDE3E9",
-  secondary70: "#A93450",
-  dark: "#07050A",
-  light: "#FDFDFD",
-  grey40: "#474761",
-  grey60: "#737394",
-  grey80: "#C8C8D5",
-  grey90: "#D8D8E1",
-  grey100: "#EFEFF3",
-  grey110: "#F7F7F9",
-};
+type Theme = "light" | "dark" | "report-writer" | "four-js";
 
-type Theme = "light" | "dark";
+const THEMES: { id: Theme; label: string; font: string; color: string }[] = [
+  { id: "light",         label: "Light",         font: "Noto Sans",  color: "#1C5EFE" },
+  { id: "dark",          label: "Dark",           font: "Noto Sans",  color: "#1C5EFE" },
+  { id: "report-writer", label: "Report Writer",  font: "Raleway",    color: "#AA2B1D" },
+  { id: "four-js",       label: "Four Js",        font: "Open Sans",  color: "#08A4D3" },
+];
+
+const FONTS = `
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&family=Michroma&family=Raleway:wght@300;400;500;600&family=Open+Sans:wght@300;400;500;600&display=swap');
+`;
 
 export default function Preview() {
   const [theme, setTheme] = useState<Theme>("light");
-  const dark = theme === "dark";
-
-  const bg = dark ? "#0D0D10" : "#ffffff";
-  const bgSurface = dark ? "#191921" : tokens.grey110;
-  const bgCard = dark ? "#191921" : "#ffffff";
-  const text = dark ? tokens.light : tokens.dark;
-  const textMuted = dark ? "#737394" : "#636388";
-  const border = dark ? "#303041" : tokens.grey90;
-
-  const btnBase: React.CSSProperties = {
-    display: "inline-flex", alignItems: "center", justifyContent: "center",
-    height: 36, padding: "0 16px", borderRadius: 8, fontSize: 14, fontWeight: 500,
-    cursor: "pointer", border: "none", fontFamily: "Noto Sans, system-ui, sans-serif",
-    transition: "all 150ms ease", whiteSpace: "nowrap",
-  };
-
-  const inputBase: React.CSSProperties = {
-    height: 36, borderRadius: 8, border: `1px solid ${border}`,
-    padding: "0 12px", fontSize: 14, fontFamily: "Noto Sans, system-ui, sans-serif",
-    background: bgCard, color: text, outline: "none", width: "100%", boxSizing: "border-box",
-  };
-
-  const label: React.CSSProperties = {
-    fontSize: 13, fontWeight: 500, color: text, marginBottom: 6, display: "block",
-  };
-
-  const hint: React.CSSProperties = { fontSize: 12, color: textMuted, marginTop: 4 };
-  const error: React.CSSProperties = { fontSize: 12, color: tokens.secondary, marginTop: 4 };
-
-  const card: React.CSSProperties = {
-    background: bgCard, borderRadius: 12, border: `1px solid ${border}`,
-    padding: "24px", marginBottom: 12,
-  };
-
-  const sectionHead: React.CSSProperties = {
-    fontFamily: "Michroma, sans-serif", fontSize: 11, letterSpacing: "0.1em",
-    textTransform: "uppercase", color: textMuted, marginBottom: 20,
-    paddingBottom: 12, borderBottom: `1px solid ${border}`,
-  };
-
-  const row: React.CSSProperties = {
-    display: "flex", flexWrap: "wrap", gap: 10, alignItems: "center",
-  };
-
-  const sublabel: React.CSSProperties = {
-    fontSize: 11, color: textMuted, marginBottom: 10, marginTop: 16,
-    textTransform: "uppercase", letterSpacing: "0.06em",
-  };
 
   return (
-    <div style={{ background: bg, minHeight: "100vh", fontFamily: "Noto Sans, system-ui, sans-serif" }}>
-      <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&family=Michroma&display=swap" rel="stylesheet" />
+    <>
+      <style>{FONTS}</style>
+      <style>{`
+        /* ---- TOKEN IMPORTS ---- */
+        :root, [data-theme="light"] {
+          --font-base: 'Noto Sans', system-ui, sans-serif;
+          --color-bg-page: #FFFFFF; --color-bg-surface: #F7F7F9; --color-bg-raised: #FFFFFF;
+          --color-text-primary: #07050A; --color-text-secondary: #474761; --color-text-muted: #737394; --color-text-on-primary: #FDFDFD;
+          --color-interactive-default: #1C5EFE; --color-interactive-hover: #1545BB; --color-interactive-subtle: #E8EFFF;
+          --color-accent-default: #EF476F; --color-accent-hover: #A93450; --color-accent-subtle: #FDE3E9;
+          --color-border-default: #D8D8E1; --color-border-focus: #1C5EFE; --color-border-error: #EF476F;
+          --color-error: #FF3B2F; --color-error-subtle: #FFF0EF;
+          --shadow-sm: 0 1px 3px rgba(28,94,254,0.08); --shadow-md: 0 4px 12px rgba(28,94,254,0.14);
+          --focus-ring-color: rgba(28,94,254,0.28); --focus-ring-width: 3px;
+          --gradient-brand: linear-gradient(135deg, #1C5EFE, #EF476F);
+          --radius-sm: 4px; --radius-md: 8px; --radius-lg: 12px; --radius-full: 9999px;
+          --height-sm: 30px; --height-md: 36px; --height-lg: 44px;
+          --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-xl: 1.25rem; --text-2xl: 1.5rem; --text-3xl: 1.875rem;
+          --transition-base: 150ms ease;
+        }
+        [data-theme="dark"] {
+          --font-base: 'Noto Sans', system-ui, sans-serif;
+          --color-bg-page: #07050A; --color-bg-surface: #0D0D10; --color-bg-raised: #191921;
+          --color-text-primary: #FDFDFD; --color-text-secondary: #A9A9BD; --color-text-muted: #737394; --color-text-on-primary: #FDFDFD;
+          --color-interactive-default: #1C5EFE; --color-interactive-hover: #82A6FE; --color-interactive-subtle: #081C4C;
+          --color-accent-default: #EF476F; --color-accent-hover: #F37593; --color-accent-subtle: #35141C;
+          --color-border-default: #303041; --color-border-focus: #1C5EFE; --color-border-error: #EF476F;
+          --color-error: #FF3B2F; --color-error-subtle: #1A0706;
+          --shadow-sm: 0 1px 3px rgba(0,0,0,0.3); --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+          --focus-ring-color: rgba(28,94,254,0.40); --focus-ring-width: 3px;
+          --gradient-brand: linear-gradient(135deg, #1C5EFE, #EF476F);
+        }
+        [data-theme="report-writer"] {
+          --font-base: 'Raleway', system-ui, sans-serif;
+          --color-bg-page: #FFFFFF; --color-bg-surface: #FAFAFA; --color-bg-raised: #FFFFFF;
+          --color-text-primary: #1B0806; --color-text-secondary: #55514D; --color-text-muted: #A39A93; --color-text-on-primary: #FFFFFF;
+          --color-interactive-default: #AA2B1D; --color-interactive-hover: #792016; --color-interactive-subtle: #F6EAE9;
+          --color-accent-default: #EC6A58; --color-accent-hover: #A74F40; --color-accent-subtle: #FDF2EE;
+          --color-border-default: #ECEAE8; --color-border-focus: #AA2B1D; --color-border-error: #FF3B2F;
+          --color-error: #FF3B2F; --color-error-subtle: #FFF0EF;
+          --shadow-sm: 0 1px 3px rgba(170,43,29,0.08); --shadow-md: 0 4px 12px rgba(170,43,29,0.14);
+          --focus-ring-color: rgba(170,43,29,0.28); --focus-ring-width: 3px;
+          --gradient-brand: linear-gradient(135deg, #AA2B1D, #EC6A58);
+        }
+        [data-theme="four-js"] {
+          --font-base: 'Open Sans', system-ui, sans-serif;
+          --color-bg-page: #FFFFFF; --color-bg-surface: #F4F4F4; --color-bg-raised: #FFFFFF;
+          --color-text-primary: #001118; --color-text-secondary: #5A5B5B; --color-text-muted: #949696; --color-text-on-primary: #FFFFFF;
+          --color-interactive-default: #08A4D3; --color-interactive-hover: #0091BB; --color-interactive-subtle: #D3EFF8;
+          --color-accent-default: #EC6A58; --color-accent-hover: #A74F40; --color-accent-subtle: #FDF2EE;
+          --color-border-default: #D3D4D4; --color-border-focus: #08A4D3; --color-border-error: #FF3B2F;
+          --color-error: #FF3B2F; --color-error-subtle: #FFF0EF;
+          --shadow-sm: 0 1px 3px rgba(8,164,211,0.08); --shadow-md: 0 4px 12px rgba(8,164,211,0.14);
+          --focus-ring-color: rgba(8,164,211,0.28); --focus-ring-width: 3px;
+          --gradient-brand: linear-gradient(135deg, #08A4D3, #EC6A58);
+        }
+      `}</style>
 
-      {/* Navbar */}
-      <nav style={{ borderBottom: `1px solid ${border}`, padding: "0 32px", height: 56, display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, background: bg, zIndex: 10 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <div style={{ width: 28, height: 28, borderRadius: 6, background: `linear-gradient(135deg, ${tokens.primary}, ${tokens.secondary})` }} />
-          <span style={{ fontFamily: "Michroma, sans-serif", fontSize: 14, color: text }}>Nyra UI</span>
-          <span style={{ fontSize: 11, background: bgSurface, color: textMuted, padding: "2px 8px", borderRadius: 99, border: `1px solid ${border}` }}>v1.0</span>
-        </div>
-        <button
-          onClick={() => setTheme(dark ? "light" : "dark")}
-          style={{ ...btnBase, background: bgSurface, color: text, border: `1px solid ${border}`, height: 32, padding: "0 12px", fontSize: 12 }}
-        >
-          {dark ? "☀ Light" : "☾ Dark"}
-        </button>
-      </nav>
+      <div data-theme={theme} style={{ background: "var(--color-bg-page)", minHeight: "100vh", fontFamily: "var(--font-base)", transition: "background 200ms ease, color 200ms ease" }}>
 
-      <div style={{ display: "grid", gridTemplateColumns: "220px 1fr", minHeight: "calc(100vh - 56px)" }}>
+        {/* NAVBAR */}
+        <nav style={{ position: "sticky", top: 0, zIndex: 100, borderBottom: "1px solid var(--color-border-default)", background: "var(--color-bg-page)", padding: "0 32px", height: 56, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <div style={{ width: 28, height: 28, borderRadius: 6, background: "var(--gradient-brand)", flexShrink: 0 }} />
+            <span style={{ fontFamily: "'Michroma', sans-serif", fontSize: 14, color: "var(--color-text-primary)" }}>Nyra UI</span>
+            <span style={{ fontSize: 11, color: "var(--color-text-muted)", background: "var(--color-bg-surface)", padding: "2px 8px", borderRadius: 99, border: "1px solid var(--color-border-default)" }}>v1.0</span>
+          </div>
 
-        {/* Sidebar */}
-        <aside style={{ borderRight: `1px solid ${border}`, padding: "24px 16px", position: "sticky", top: 56, height: "calc(100vh - 56px)", overflowY: "auto" }}>
-          <p style={{ fontSize: 11, color: textMuted, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 12 }}>Composants</p>
-          {["Button", "Input", "Select", "Checkbox", "Couleurs", "Typographie"].map((item) => (
-            <a key={item} href={`#${item.toLowerCase()}`} style={{ display: "block", padding: "6px 10px", borderRadius: 6, fontSize: 14, color: textMuted, textDecoration: "none", marginBottom: 2 }}>
-              {item}
-            </a>
-          ))}
-        </aside>
+          {/* THEME SWITCHER */}
+          <div style={{ display: "flex", gap: 4, background: "var(--color-bg-surface)", padding: 4, borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)" }}>
+            {THEMES.map(t => (
+              <button
+                key={t.id}
+                onClick={() => setTheme(t.id)}
+                style={{
+                  padding: "5px 12px", borderRadius: "var(--radius-md)", border: "none",
+                  fontSize: 12, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-base)",
+                  background: theme === t.id ? "var(--color-bg-raised)" : "transparent",
+                  color: theme === t.id ? "var(--color-text-primary)" : "var(--color-text-muted)",
+                  boxShadow: theme === t.id ? "var(--shadow-sm)" : "none",
+                  transition: "all var(--transition-base)",
+                  display: "flex", alignItems: "center", gap: 6,
+                }}
+              >
+                <span style={{ width: 8, height: 8, borderRadius: "50%", background: t.color, display: "inline-block", flexShrink: 0 }} />
+                {t.label}
+              </button>
+            ))}
+          </div>
+        </nav>
 
-        {/* Main */}
-        <main style={{ padding: "32px 40px", maxWidth: 860 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "200px 1fr" }}>
 
-          {/* Button */}
-          <section id="button" style={{ marginBottom: 48 }}>
-            <p style={sectionHead}>Button</p>
-            <div style={card}>
-              <p style={sublabel}>Variantes</p>
-              <div style={row}>
-                <button style={{ ...btnBase, background: tokens.primary, color: tokens.light, boxShadow: `0 4px 12px rgba(28,94,254,0.25)` }}>Primary</button>
-                <button style={{ ...btnBase, background: tokens.secondary, color: tokens.light, boxShadow: `0 4px 12px rgba(239,71,111,0.25)` }}>Secondary</button>
-                <button style={{ ...btnBase, background: "transparent", color: tokens.primary, border: `1px solid ${tokens.primary}` }}>Ghost</button>
-                <button style={{ ...btnBase, background: "transparent", color: tokens.secondary, border: `1px solid ${tokens.secondary}` }}>Danger</button>
+          {/* SIDEBAR */}
+          <aside style={{ borderRight: "1px solid var(--color-border-default)", padding: "28px 16px", position: "sticky", top: 56, height: "calc(100vh - 56px)", overflowY: "auto" }}>
+            <p style={{ fontSize: 10, color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.1em", margin: "0 0 12px 8px" }}>Composants</p>
+            {["Button", "Input", "Select", "Checkbox", "Couleurs", "Typographie"].map(item => (
+              <a key={item} href={`#${item.toLowerCase()}`}
+                style={{ display: "block", padding: "6px 10px", borderRadius: "var(--radius-md)", fontSize: 14, color: "var(--color-text-secondary)", textDecoration: "none", marginBottom: 2, transition: "color var(--transition-base)" }}>
+                {item}
+              </a>
+            ))}
+          </aside>
+
+          {/* CONTENT */}
+          <main style={{ padding: "40px 48px", maxWidth: 880 }}>
+
+            {/* ── BUTTON ── */}
+            <section id="button" style={{ marginBottom: 56 }}>
+              <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid var(--color-border-default)" }}>Button</h2>
+
+              <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: 24 }}>
+                <p style={{ fontSize: 11, color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.06em", margin: "0 0 12px" }}>Variantes</p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 24 }}>
+                  {[
+                    { label: "Primary",   bg: "var(--color-interactive-default)", color: "var(--color-text-on-primary)", border: "none" },
+                    { label: "Secondary", bg: "var(--color-accent-default)",       color: "var(--color-text-on-primary)", border: "none" },
+                    { label: "Ghost",     bg: "transparent", color: "var(--color-interactive-default)", border: "1px solid var(--color-interactive-default)" },
+                    { label: "Danger",    bg: "transparent", color: "var(--color-accent-default)",       border: "1px solid var(--color-accent-default)" },
+                  ].map(b => (
+                    <button key={b.label} style={{ height: 36, padding: "0 16px", borderRadius: "var(--radius-md)", border: b.border, background: b.bg, color: b.color, fontSize: 14, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-base)", boxShadow: b.border === "none" ? "var(--shadow-md)" : "none" }}>
+                      {b.label}
+                    </button>
+                  ))}
+                </div>
+
+                <p style={{ fontSize: 11, color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.06em", margin: "0 0 12px" }}>Tailles</p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 10, alignItems: "center", marginBottom: 24 }}>
+                  <button style={{ height: 30, padding: "0 12px", borderRadius: "var(--radius-md)", border: "none", background: "var(--color-interactive-default)", color: "var(--color-text-on-primary)", fontSize: 12, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-base)" }}>Small</button>
+                  <button style={{ height: 36, padding: "0 16px", borderRadius: "var(--radius-md)", border: "none", background: "var(--color-interactive-default)", color: "var(--color-text-on-primary)", fontSize: 14, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-base)" }}>Medium</button>
+                  <button style={{ height: 44, padding: "0 22px", borderRadius: "var(--radius-md)", border: "none", background: "var(--color-interactive-default)", color: "var(--color-text-on-primary)", fontSize: 15, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-base)" }}>Large</button>
+                </div>
+
+                <p style={{ fontSize: 11, color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.06em", margin: "0 0 12px" }}>États</p>
+                <div style={{ display: "flex", gap: 10 }}>
+                  <button style={{ height: 36, padding: "0 16px", borderRadius: "var(--radius-md)", border: "none", background: "var(--color-interactive-default)", color: "var(--color-text-on-primary)", fontSize: 14, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-base)", opacity: 0.75 }}>⟳ Chargement</button>
+                  <button disabled style={{ height: 36, padding: "0 16px", borderRadius: "var(--radius-md)", border: "none", background: "var(--color-interactive-default)", color: "var(--color-text-on-primary)", fontSize: 14, fontWeight: 500, cursor: "not-allowed", fontFamily: "var(--font-base)", opacity: 0.35 }}>Désactivé</button>
+                </div>
               </div>
+            </section>
 
-              <p style={sublabel}>Tailles</p>
-              <div style={row}>
-                <button style={{ ...btnBase, height: 30, padding: "0 10px", fontSize: 12, background: tokens.primary, color: tokens.light }}>Small</button>
-                <button style={{ ...btnBase, background: tokens.primary, color: tokens.light }}>Medium</button>
-                <button style={{ ...btnBase, height: 44, padding: "0 22px", fontSize: 15, background: tokens.primary, color: tokens.light }}>Large</button>
-              </div>
-
-              <p style={sublabel}>États</p>
-              <div style={row}>
-                <button style={{ ...btnBase, background: tokens.primary, color: tokens.light, opacity: 0.75 }}>⟳ Chargement</button>
-                <button style={{ ...btnBase, background: tokens.primary, color: tokens.light, opacity: 0.35, cursor: "not-allowed" }} disabled>Désactivé</button>
-              </div>
-            </div>
-          </section>
-
-          {/* Input */}
-          <section id="input" style={{ marginBottom: 48 }}>
-            <p style={sectionHead}>Input</p>
-            <div style={card}>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
-                <div>
-                  <span style={label}>Champ normal</span>
-                  <input style={inputBase} placeholder="Tapez quelque chose..." />
-                </div>
-                <div>
-                  <span style={label}>Avec hint</span>
-                  <input style={inputBase} placeholder="exemple@email.com" />
-                  <p style={hint}>On ne partagera jamais votre email.</p>
-                </div>
-                <div>
-                  <span style={label}>Avec erreur</span>
-                  <input style={{ ...inputBase, borderColor: tokens.secondary }} placeholder="Votre nom" />
-                  <p style={error}>Ce champ est requis.</p>
-                </div>
-                <div>
-                  <span style={{ ...label, opacity: 0.4 }}>Désactivé</span>
-                  <input style={{ ...inputBase, opacity: 0.4, cursor: "not-allowed" }} placeholder="Non modifiable" disabled />
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Select */}
-          <section id="select" style={{ marginBottom: 48 }}>
-            <p style={sectionHead}>Select</p>
-            <div style={card}>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
-                <div>
-                  <span style={label}>Pays</span>
-                  <select style={inputBase}>
-                    <option>Choisir...</option>
-                    <option>France</option>
-                    <option>Belgique</option>
-                    <option>Suisse</option>
-                  </select>
-                </div>
-                <div>
-                  <span style={label}>Avec erreur</span>
-                  <select style={{ ...inputBase, borderColor: tokens.secondary }}>
-                    <option>Choisir...</option>
-                    <option>Option A</option>
-                    <option>Option B</option>
-                  </select>
-                  <p style={error}>Sélection requise.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Checkbox */}
-          <section id="checkbox" style={{ marginBottom: 48 }}>
-            <p style={sectionHead}>Checkbox</p>
-            <div style={card}>
-              <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                {[
-                  { label: "Option par défaut", checked: false },
-                  { label: "Option cochée", checked: true },
-                ].map(({ label: l, checked }) => (
-                  <label key={l} style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer", fontSize: 14, color: text }}>
-                    <div style={{ width: 16, height: 16, borderRadius: 4, border: checked ? `2px solid ${tokens.primary}` : `2px solid ${border}`, background: checked ? tokens.primary : "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                      {checked && <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>}
+            {/* ── INPUT ── */}
+            <section id="input" style={{ marginBottom: 56 }}>
+              <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid var(--color-border-default)" }}>Input</h2>
+              <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: 24 }}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+                  {[
+                    { label: "Champ normal",  placeholder: "Tapez quelque chose...", hint: null, error: null },
+                    { label: "Avec hint",      placeholder: "exemple@email.com",     hint: "On ne partagera jamais votre email.", error: null },
+                    { label: "Avec erreur",    placeholder: "Votre nom",             hint: null, error: "Ce champ est requis." },
+                    { label: "Désactivé",      placeholder: "Non modifiable",        hint: null, error: null, disabled: true },
+                  ].map((field, i) => (
+                    <div key={i}>
+                      <label style={{ fontSize: 13, fontWeight: 500, color: "var(--color-text-primary)", display: "block", marginBottom: 6, fontFamily: "var(--font-base)", opacity: (field as any).disabled ? 0.4 : 1 }}>{field.label}</label>
+                      <input
+                        placeholder={field.placeholder}
+                        disabled={(field as any).disabled}
+                        style={{ width: "100%", height: 36, borderRadius: "var(--radius-md)", border: `1px solid ${field.error ? "var(--color-border-error)" : "var(--color-border-default)"}`, padding: "0 12px", fontSize: 14, fontFamily: "var(--font-base)", background: "var(--color-bg-raised)", color: "var(--color-text-primary)", outline: "none", boxSizing: "border-box", opacity: (field as any).disabled ? 0.4 : 1 }}
+                      />
+                      {field.error && <p style={{ fontSize: 12, color: "var(--color-accent-default)", margin: "4px 0 0", fontFamily: "var(--font-base)" }}>{field.error}</p>}
+                      {field.hint && <p style={{ fontSize: 12, color: "var(--color-text-muted)", margin: "4px 0 0", fontFamily: "var(--font-base)" }}>{field.hint}</p>}
                     </div>
-                    {l}
-                  </label>
-                ))}
-                <label style={{ display: "flex", alignItems: "center", gap: 10, cursor: "not-allowed", fontSize: 14, color: text, opacity: 0.4 }}>
-                  <div style={{ width: 16, height: 16, borderRadius: 4, border: `2px solid ${border}`, flexShrink: 0 }} />
-                  Option désactivée
-                </label>
-                <div>
-                  <label style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, color: text }}>
-                    <div style={{ width: 16, height: 16, borderRadius: 4, border: `2px solid ${tokens.secondary}`, flexShrink: 0 }} />
-                    Avec erreur
-                  </label>
-                  <p style={{ ...error, marginLeft: 26 }}>Ce champ est requis.</p>
+                  ))}
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
 
-          {/* Couleurs */}
-          <section id="couleurs" style={{ marginBottom: 48 }}>
-            <p style={sectionHead}>Couleurs</p>
-            <div style={card}>
-              {[
-                { name: "Primary", colors: [["#F4F7FF","10"],["#E8EFFF","20"],["#CFDDFF","30"],["#A4BFFF","40"],["#82A6FE","50"],["#1C5EFE","60"],["#1545BB","70"],["#10358F","80"],["#0D2C79","90"],["#081C4C","100"],["#051130","110"]] },
-                { name: "Secondary", colors: [["#FDEDF1","10"],["#FDE3E9","20"],["#FBD1DB","30"],["#F7A3B7","40"],["#F37593","50"],["#EF476F","60"],["#A93450","70"],["#7B273B","80"],["#642131","90"],["#35141C","100"],["#170B0E","110"]] },
-                { name: "Grey", colors: [["#F7F7F9","110"],["#EFEFF3","100"],["#D8D8E1","90"],["#C8C8D5","80"],["#A9A9BD","70"],["#737394","60"],["#636388","50"],["#474761","40"],["#303041","30"],["#191921","20"],["#0D0D10","10"]] },
-              ].map(({ name, colors }) => (
-                <div key={name} style={{ marginBottom: 24 }}>
-                  <p style={{ fontSize: 12, color: textMuted, marginBottom: 10 }}>{name}</p>
-                  <div style={{ display: "flex", gap: 4 }}>
-                    {colors.map(([color, lbl]) => (
-                      <div key={lbl} style={{ flex: 1, textAlign: "center" }}>
-                        <div style={{ height: 36, borderRadius: 6, background: color, border: `1px solid ${border}` }} />
-                        <p style={{ fontSize: 10, color: textMuted, margin: "4px 0 0" }}>{lbl}</p>
-                      </div>
-                    ))}
+            {/* ── SELECT ── */}
+            <section id="select" style={{ marginBottom: 56 }}>
+              <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid var(--color-border-default)" }}>Select</h2>
+              <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: 24 }}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+                  <div>
+                    <label style={{ fontSize: 13, fontWeight: 500, color: "var(--color-text-primary)", display: "block", marginBottom: 6, fontFamily: "var(--font-base)" }}>Pays</label>
+                    <div style={{ position: "relative" }}>
+                      <select style={{ width: "100%", height: 36, appearance: "none", borderRadius: "var(--radius-md)", border: "1px solid var(--color-border-default)", padding: "0 32px 0 12px", fontSize: 14, fontFamily: "var(--font-base)", background: "var(--color-bg-raised)", color: "var(--color-text-primary)", outline: "none" }}>
+                        <option>Choisir...</option><option>France</option><option>Belgique</option><option>Suisse</option>
+                      </select>
+                      <span style={{ position: "absolute", right: 10, top: "50%", transform: "translateY(-50%)", color: "var(--color-text-muted)", pointerEvents: "none" }}>
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                      </span>
+                    </div>
+                  </div>
+                  <div>
+                    <label style={{ fontSize: 13, fontWeight: 500, color: "var(--color-text-primary)", display: "block", marginBottom: 6, fontFamily: "var(--font-base)" }}>Avec erreur</label>
+                    <div style={{ position: "relative" }}>
+                      <select style={{ width: "100%", height: 36, appearance: "none", borderRadius: "var(--radius-md)", border: "1px solid var(--color-border-error)", padding: "0 32px 0 12px", fontSize: 14, fontFamily: "var(--font-base)", background: "var(--color-bg-raised)", color: "var(--color-text-primary)", outline: "none" }}>
+                        <option>Choisir...</option><option>Option A</option><option>Option B</option>
+                      </select>
+                      <span style={{ position: "absolute", right: 10, top: "50%", transform: "translateY(-50%)", color: "var(--color-text-muted)", pointerEvents: "none" }}>
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                      </span>
+                    </div>
+                    <p style={{ fontSize: 12, color: "var(--color-accent-default)", margin: "4px 0 0", fontFamily: "var(--font-base)" }}>Sélection requise.</p>
                   </div>
                 </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Typo */}
-          <section id="typographie" style={{ marginBottom: 48 }}>
-            <p style={sectionHead}>Typographie</p>
-            <div style={card}>
-              <div style={{ marginBottom: 24 }}>
-                <p style={{ fontSize: 11, color: textMuted, marginBottom: 8 }}>Michroma — titres uniquement</p>
-                <p style={{ fontFamily: "Michroma, sans-serif", fontSize: 26, color: text, margin: 0 }}>The future is modular.</p>
               </div>
-              <div style={{ borderTop: `1px solid ${border}`, paddingTop: 20, display: "flex", flexDirection: "column", gap: 10 }}>
-                <p style={{ fontSize: 11, color: textMuted, marginBottom: 4 }}>Noto Sans — UI & texte</p>
+            </section>
+
+            {/* ── CHECKBOX ── */}
+            <section id="checkbox" style={{ marginBottom: 56 }}>
+              <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid var(--color-border-default)" }}>Checkbox</h2>
+              <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: 24, display: "flex", flexDirection: "column", gap: 16 }}>
                 {[
-                  { size: 24, weight: 300, label: "Light 24" },
-                  { size: 20, weight: 400, label: "Regular 20" },
-                  { size: 16, weight: 500, label: "Medium 16" },
-                  { size: 14, weight: 600, label: "Semi Bold 14" },
-                  { size: 12, weight: 400, label: "Caption 12" },
-                ].map(({ size, weight, label: l }) => (
-                  <div key={l} style={{ display: "flex", alignItems: "baseline", gap: 16 }}>
-                    <span style={{ fontSize: 11, color: textMuted, width: 90, flexShrink: 0 }}>{l}</span>
-                    <p style={{ fontSize: size, fontWeight: weight, color: text, margin: 0 }}>Genero Enterprise</p>
+                  { label: "Option par défaut",  checked: false, error: false, disabled: false },
+                  { label: "Option cochée",       checked: true,  error: false, disabled: false },
+                  { label: "Option désactivée",   checked: false, error: false, disabled: true },
+                  { label: "Avec erreur",         checked: false, error: true,  disabled: false },
+                ].map(({ label, checked, error, disabled }, i) => (
+                  <div key={i}>
+                    <label style={{ display: "flex", alignItems: "center", gap: 10, cursor: disabled ? "not-allowed" : "pointer", opacity: disabled ? 0.4 : 1 }}>
+                      <div style={{ width: 16, height: 16, borderRadius: 4, border: `2px solid ${error ? "var(--color-border-error)" : checked ? "var(--color-interactive-default)" : "var(--color-border-default)"}`, background: checked ? "var(--color-interactive-default)" : "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                        {checked && <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>}
+                      </div>
+                      <span style={{ fontSize: 14, color: "var(--color-text-primary)", fontFamily: "var(--font-base)" }}>{label}</span>
+                    </label>
+                    {error && <p style={{ fontSize: 12, color: "var(--color-accent-default)", margin: "4px 0 0 26px", fontFamily: "var(--font-base)" }}>Ce champ est requis.</p>}
                   </div>
                 ))}
               </div>
-            </div>
-          </section>
+            </section>
 
-        </main>
+            {/* ── COULEURS ── */}
+            <section id="couleurs" style={{ marginBottom: 56 }}>
+              <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid var(--color-border-default)" }}>Couleurs</h2>
+              <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: 24 }}>
+                {THEMES.find(t => t.id === theme) && (() => {
+                  const palettes: Record<Theme, { primary: string[]; secondary: string[]; grey: string[] }> = {
+                    "light":         { primary: ["#F4F7FF","#E8EFFF","#CFDDFF","#A4BFFF","#82A6FE","#1C5EFE","#1545BB","#10358F","#0D2C79","#081C4C","#051130"], secondary: ["#FDEDF1","#FDE3E9","#FBD1DB","#F7A3B7","#F37593","#EF476F","#A93450","#7B273B","#642131","#35141C","#170B0E"], grey: ["#F7F7F9","#EFEFF3","#D8D8E1","#C8C8D5","#A9A9BD","#737394","#636388","#474761","#303041","#191921","#0D0D10"] },
+                    "dark":          { primary: ["#F4F7FF","#E8EFFF","#CFDDFF","#A4BFFF","#82A6FE","#1C5EFE","#1545BB","#10358F","#0D2C79","#081C4C","#051130"], secondary: ["#FFFFFF","#FDE3E9","#FBD1DB","#F7A3B7","#F37593","#EF476F","#A93450","#7B273B","#642131","#35141C","#170B0E"], grey: ["#F7F7F9","#EFEFF3","#D8D8E1","#C8C8D5","#A9A9BD","#737394","#636388","#474761","#303041","#191921","#0D0D10"] },
+                    "report-writer": { primary: ["#FBF4F4","#F6EAE9","#EDD2D0","#DDAAA5","#D08A83","#AA2B1D","#792016","#591912","#481510","#280E0B","#1B0806"], secondary: ["#FEF9F7","#FDF2EE","#FBE4DC","#F7CABC","#FAB7A5","#EC6A58","#A74F40","#7A4030","#633227","#351A17","#351A17"], grey: ["#FAFAFA","#F6F5F4","#ECEAE8","#DAD7D4","#CBC5C1","#A39A93","#746E69","#55514D","#45423F","#232323","#0D0D10"] },
+                    "four-js":       { primary: ["#ECF6FB","#D3EFF8","#A7DDF1","#74CBE9","#25BAE1","#08A4D3","#0091BB","#006785","#003E53","#001B25","#001118"], secondary: ["#FEF9F7","#FDF2EE","#FBE4DC","#F7CABC","#FAB7A5","#EC6A58","#A74F40","#7A4030","#633227","#351A17","#351A17"], grey: ["#F4F4F4","#DDDEDE","#D3D4D4","#BEBFBF","#A9AAAA","#949696","#808282","#5A5B5B","#363737","#161616","#0D0D0D"] },
+                  };
+                  const p = palettes[theme];
+                  const labels = ["10","20","30","40","50","60","70","80","90","100","110"];
+                  return (
+                    <>
+                      {[{ name: "Primary", colors: p.primary }, { name: "Secondary", colors: p.secondary }, { name: "Grey", colors: p.grey }].map(({ name, colors }) => (
+                        <div key={name} style={{ marginBottom: 20 }}>
+                          <p style={{ fontSize: 12, color: "var(--color-text-muted)", marginBottom: 8, fontFamily: "var(--font-base)" }}>{name}</p>
+                          <div style={{ display: "flex", gap: 4 }}>
+                            {colors.map((c, i) => (
+                              <div key={i} style={{ flex: 1, textAlign: "center" }}>
+                                <div style={{ height: 32, borderRadius: 6, background: c, border: "1px solid rgba(0,0,0,0.06)" }} />
+                                <p style={{ fontSize: 10, color: "var(--color-text-muted)", margin: "4px 0 0", fontFamily: "var(--font-base)" }}>{labels[i]}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </>
+                  );
+                })()}
+              </div>
+            </section>
+
+            {/* ── TYPOGRAPHIE ── */}
+            <section id="typographie" style={{ marginBottom: 56 }}>
+              <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid var(--color-border-default)" }}>Typographie</h2>
+              <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: 24 }}>
+                <div style={{ marginBottom: 24 }}>
+                  <p style={{ fontSize: 11, color: "var(--color-text-muted)", marginBottom: 8, fontFamily: "var(--font-base)" }}>Michroma — titres marketing uniquement</p>
+                  <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: 26, color: "var(--color-text-primary)", margin: 0 }}>The future is modular.</p>
+                </div>
+                <div style={{ borderTop: "1px solid var(--color-border-default)", paddingTop: 20 }}>
+                  <p style={{ fontSize: 11, color: "var(--color-text-muted)", marginBottom: 16, fontFamily: "var(--font-base)" }}>
+                    {THEMES.find(t => t.id === theme)?.font} — UI & texte
+                  </p>
+                  {[
+                    { size: 34, weight: 300, token: "heading-03" },
+                    { size: 28, weight: 300, token: "heading-02" },
+                    { size: 20, weight: 300, token: "heading-01" },
+                    { size: 16, weight: 600, token: "title-medium" },
+                    { size: 16, weight: 300, token: "body-medium" },
+                    { size: 14, weight: 300, token: "body-small" },
+                    { size: 12, weight: 400, token: "caption" },
+                  ].map(({ size, weight, token }) => (
+                    <div key={token} style={{ display: "flex", alignItems: "baseline", gap: 20, marginBottom: 10 }}>
+                      <span style={{ fontSize: 11, color: "var(--color-text-muted)", width: 100, flexShrink: 0, fontFamily: "var(--font-base)" }}>{token}</span>
+                      <p style={{ fontSize: size, fontWeight: weight, color: "var(--color-text-primary)", margin: 0, fontFamily: "var(--font-base)" }}>Genero Enterprise</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+          </main>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

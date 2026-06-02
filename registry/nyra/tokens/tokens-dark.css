@@ -1,0 +1,121 @@
+/* ============================================================
+   Nyra UI — Thème Dark
+   Usage : [data-theme="dark"]
+   Police : Noto Sans
+   ============================================================ */
+
+[data-theme="dark"] {
+
+  /* ----------------------------------------------------------
+     FONT
+  ---------------------------------------------------------- */
+  --font-base: 'Noto Sans', system-ui, sans-serif;
+
+  /* ----------------------------------------------------------
+     PRIMITIVES — identiques au thème Light
+     (le fond change, pas la palette primary)
+  ---------------------------------------------------------- */
+  --primitive-primary-10:  #F4F7FF;
+  --primitive-primary-20:  #E8EFFF;
+  --primitive-primary-30:  #CFDDFF;
+  --primitive-primary-40:  #A4BFFF;
+  --primitive-primary-50:  #82A6FE;
+  --primitive-primary-60:  #1C5EFE;
+  --primitive-primary-70:  #1545BB;
+  --primitive-primary-80:  #10358F;
+  --primitive-primary-90:  #0D2C79;
+  --primitive-primary-100: #081C4C;
+  --primitive-primary-110: #051130;
+
+  --primitive-secondary-10:  #FFFFFF;
+  --primitive-secondary-20:  #FDE3E9;
+  --primitive-secondary-30:  #FBD1DB;
+  --primitive-secondary-40:  #F7A3B7;
+  --primitive-secondary-50:  #F37593;
+  --primitive-secondary-60:  #EF476F;
+  --primitive-secondary-70:  #A93450;
+  --primitive-secondary-80:  #7B273B;
+  --primitive-secondary-90:  #642131;
+  --primitive-secondary-100: #35141C;
+  --primitive-secondary-110: #170B0E;
+
+  --primitive-grey-10:  #F7F7F9;
+  --primitive-grey-20:  #EFEFF3;
+  --primitive-grey-30:  #D8D8E1;
+  --primitive-grey-40:  #C8C8D5;
+  --primitive-grey-50:  #A9A9BD;
+  --primitive-grey-60:  #737394;
+  --primitive-grey-70:  #636388;
+  --primitive-grey-80:  #474761;
+  --primitive-grey-90:  #303041;
+  --primitive-grey-100: #191921;
+  --primitive-grey-110: #0D0D10;
+
+  /* ----------------------------------------------------------
+     TOKENS SÉMANTIQUES — Fond (inversé)
+  ---------------------------------------------------------- */
+  --color-bg-page:    #07050A;
+  --color-bg-surface: #0D0D10;
+  --color-bg-raised:  #191921;
+  --color-bg-overlay: rgba(0, 0, 0, 0.60);
+
+  /* ----------------------------------------------------------
+     TOKENS SÉMANTIQUES — Texte (inversé)
+  ---------------------------------------------------------- */
+  --color-text-primary:    #FDFDFD;
+  --color-text-secondary:  #A9A9BD;
+  --color-text-muted:      #737394;
+  --color-text-disabled:   #474761;
+  --color-text-inverse:    #07050A;
+  --color-text-on-primary: #FDFDFD;
+
+  /* ----------------------------------------------------------
+     TOKENS SÉMANTIQUES — Interactif (identique Light)
+  ---------------------------------------------------------- */
+  --color-interactive-default: #1C5EFE;
+  --color-interactive-hover:   #82A6FE;
+  --color-interactive-active:  #A4BFFF;
+  --color-interactive-subtle:  #081C4C;
+  --color-interactive-muted:   #0D2C79;
+
+  /* ----------------------------------------------------------
+     TOKENS SÉMANTIQUES — Accent
+  ---------------------------------------------------------- */
+  --color-accent-default: #EF476F;
+  --color-accent-hover:   #F37593;
+  --color-accent-active:  #F7A3B7;
+  --color-accent-subtle:  #35141C;
+
+  /* ----------------------------------------------------------
+     TOKENS SÉMANTIQUES — Bordures
+  ---------------------------------------------------------- */
+  --color-border-default: #303041;
+  --color-border-strong:  #474761;
+  --color-border-focus:   #1C5EFE;
+  --color-border-error:   #EF476F;
+
+  /* ----------------------------------------------------------
+     TOKENS SÉMANTIQUES — États fonctionnels
+  ---------------------------------------------------------- */
+  --color-error:          #FF3B2F;
+  --color-error-subtle:   #1A0706;
+  --color-success:        #35C759;
+  --color-success-subtle: #0A1F10;
+  --color-warning:        #FF943C;
+  --color-warning-subtle: #1A0E05;
+  --color-info:           #82A6FE;
+  --color-info-subtle:    #081C4C;
+
+  /* ----------------------------------------------------------
+     OMBRES
+  ---------------------------------------------------------- */
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.30);
+  --shadow-md: 0 4px 12px 0 rgba(0, 0, 0, 0.40);
+  --shadow-lg: 0 8px 24px 0 rgba(0, 0, 0, 0.50);
+  --shadow-xl: 0 16px 40px 0 rgba(0, 0, 0, 0.60);
+
+  --focus-ring-color: rgba(28, 94, 254, 0.40);
+
+  --gradient-brand: linear-gradient(135deg, #1C5EFE, #EF476F);
+  --gradient-primary: linear-gradient(135deg, #0D2C79, #1C5EFE);
+}

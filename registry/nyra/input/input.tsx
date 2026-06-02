@@ -11,36 +11,51 @@ export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
   rightIcon?: React.ReactNode;
 }
 
-const sizes: Record<InputSize, { wrapper: string; input: string }> = {
-  sm: { wrapper: "h-8",  input: "text-sm px-3" },
-  md: { wrapper: "h-10", input: "text-sm px-3" },
-  lg: { wrapper: "h-12", input: "text-base px-4" },
-};
-
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ size = "md", label, hint, error, leftIcon, rightIcon, className = "", id, ...props }, ref) => {
+  ({ size = "md", label, hint, error, leftIcon, rightIcon, style, id, ...props }, ref) => {
     const inputId = id ?? `input-${Math.random().toString(36).slice(2, 8)}`;
-    const { wrapper, input } = sizes[size];
-    const borderClass = error
-      ? "border-[#EF476F] focus-within:ring-[rgba(239,71,111,0.30)]"
-      : "border-[#D8D8E1] focus-within:border-[#1C5EFE] focus-within:ring-[rgba(28,94,254,0.30)]";
+    const heights: Record<string, string> = { sm: "var(--height-sm)", md: "var(--height-md)", lg: "var(--height-lg)" };
+    const fontSizes: Record<string, string> = { sm: "var(--text-sm)", md: "var(--text-sm)", lg: "var(--text-base)" };
+    const paddingX: Record<string, string> = { sm: "10px", md: "12px", lg: "14px" };
 
     return (
-      <div className="flex flex-col gap-1.5 w-full">
-        {label && <label htmlFor={inputId} className="text-sm font-medium text-[#303041]">{label}</label>}
-        <div className={["relative flex items-center rounded-lg border bg-[#FDFDFD] transition-all duration-150 focus-within:ring-[3px]", borderClass, wrapper, className].join(" ")}>
-          {leftIcon && <span className="absolute left-3 text-[#737394] flex items-center pointer-events-none">{leftIcon}</span>}
+      <div style={{ display: "flex", flexDirection: "column", gap: 6, width: "100%" }}>
+        {label && (
+          <label htmlFor={inputId} style={{ fontSize: "var(--text-sm)", fontWeight: 500, color: "var(--color-text-primary)", fontFamily: "var(--font-base)" }}>
+            {label}
+          </label>
+        )}
+        <div style={{ position: "relative", display: "flex", alignItems: "center", height: heights[size] }}>
+          {leftIcon && (
+            <span style={{ position: "absolute", left: 10, color: "var(--color-text-muted)", display: "flex", pointerEvents: "none" }}>
+              {leftIcon}
+            </span>
+          )}
           <input
             ref={ref}
             id={inputId}
-            className={["w-full h-full bg-transparent outline-none text-[#07050A] placeholder:text-[#A9A9BD]", input, leftIcon ? "pl-9" : "", rightIcon ? "pr-9" : ""].join(" ")}
+            style={{
+              width: "100%", height: "100%", borderRadius: "var(--radius-md)",
+              border: `1px solid ${error ? "var(--color-border-error)" : "var(--color-border-default)"}`,
+              padding: `0 ${rightIcon ? "36px" : paddingX[size]} 0 ${leftIcon ? "36px" : paddingX[size]}`,
+              fontSize: fontSizes[size], fontFamily: "var(--font-base)",
+              background: "var(--color-bg-raised)", color: "var(--color-text-primary)",
+              outline: "none", boxSizing: "border-box", transition: "border-color var(--transition-base), box-shadow var(--transition-base)",
+              ...style,
+            }}
+            onFocus={e => { e.target.style.borderColor = "var(--color-border-focus)"; e.target.style.boxShadow = `0 0 0 var(--focus-ring-width) var(--focus-ring-color)`; }}
+            onBlur={e => { e.target.style.borderColor = error ? "var(--color-border-error)" : "var(--color-border-default)"; e.target.style.boxShadow = "none"; }}
             aria-invalid={!!error}
             {...props}
           />
-          {rightIcon && <span className="absolute right-3 text-[#737394] flex items-center">{rightIcon}</span>}
+          {rightIcon && (
+            <span style={{ position: "absolute", right: 10, color: "var(--color-text-muted)", display: "flex" }}>
+              {rightIcon}
+            </span>
+          )}
         </div>
-        {error && <p className="text-xs text-[#EF476F]">{error}</p>}
-        {hint && !error && <p className="text-xs text-[#737394]">{hint}</p>}
+        {error && <p style={{ fontSize: "var(--text-xs)", color: "var(--color-accent-default)", margin: 0, fontFamily: "var(--font-base)" }}>{error}</p>}
+        {hint && !error && <p style={{ fontSize: "var(--text-xs)", color: "var(--color-text-muted)", margin: 0, fontFamily: "var(--font-base)" }}>{hint}</p>}
       </div>
     );
   }

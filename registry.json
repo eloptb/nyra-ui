@@ -1,0 +1,80 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "nyra-ui",
+  "homepage": "https://nyra-ui.vercel.app",
+  "items": [
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Bouton Nyra UI — 4 variantes (primary, secondary, ghost, danger), 3 tailles, état loading.",
+      "files": [
+        {
+          "path": "registry/nyra/button/button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Champ texte Nyra UI — label, hint, message d'erreur, icônes.",
+      "files": [
+        {
+          "path": "registry/nyra/input/input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Menu déroulant Nyra UI — label, hint, erreur, placeholder.",
+      "files": [
+        {
+          "path": "registry/nyra/select/select.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Case à cocher Nyra UI — label, hint, erreur, états disabled.",
+      "files": [
+        {
+          "path": "registry/nyra/checkbox/checkbox.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "Label Nyra UI — indicateur requis (*) inclus.",
+      "files": [
+        {
+          "path": "registry/nyra/label/label.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tokens",
+      "type": "registry:file",
+      "title": "Design Tokens",
+      "description": "Variables CSS Genero Enterprise — couleurs, typo, espacements, ombres, gradients.",
+      "files": [
+        {
+          "path": "registry/nyra/tokens/tokens.css",
+          "type": "registry:file",
+          "target": "app/nyra-tokens.css"
+        }
+      ]
+    }
+  ]
+}

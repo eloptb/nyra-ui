@@ -1,0 +1,141 @@
+/* ============================================================
+   Nyra UI — Design Tokens
+   Genero Enterprise Brand Guidelines v1.0
+   ============================================================ */
+
+:root {
+  /* ----------------------------------------------------------
+     COLORS — Primary (Blue)
+  ---------------------------------------------------------- */
+  --color-primary-10:  #F4F7FF;
+  --color-primary-20:  #E8EFFF;
+  --color-primary-30:  #CFDDFF;
+  --color-primary-40:  #A4BFFF;
+  --color-primary-50:  #82A6FE;
+  --color-primary-60:  #1C5EFE; /* Brand primary */
+  --color-primary-70:  #1545BB;
+  --color-primary-80:  #10358F;
+  --color-primary-90:  #0D2C79;
+  --color-primary-100: #081C4C;
+  --color-primary-110: #051130;
+
+  /* ----------------------------------------------------------
+     COLORS — Secondary (Pink)
+  ---------------------------------------------------------- */
+  --color-secondary-10:  #FDEDF1;
+  --color-secondary-20:  #FDE3E9;
+  --color-secondary-30:  #FBD1DB;
+  --color-secondary-40:  #F7A3B7;
+  --color-secondary-50:  #F37593;
+  --color-secondary-60:  #EF476F; /* Brand secondary */
+  --color-secondary-70:  #A93450;
+  --color-secondary-80:  #7B273B;
+  --color-secondary-90:  #642131;
+  --color-secondary-100: #35141C;
+  --color-secondary-110: #170B0E;
+
+  /* ----------------------------------------------------------
+     COLORS — Grey
+  ---------------------------------------------------------- */
+  --color-grey-10:  #0D0D10;
+  --color-grey-20:  #191921;
+  --color-grey-30:  #303041;
+  --color-grey-40:  #474761;
+  --color-grey-50:  #636388;
+  --color-grey-60:  #737394;
+  --color-grey-70:  #A9A9BD;
+  --color-grey-80:  #C8C8D5;
+  --color-grey-90:  #D8D8E1;
+  --color-grey-100: #EFEFF3;
+  --color-grey-110: #F7F7F9;
+
+  /* ----------------------------------------------------------
+     COLORS — Base
+  ---------------------------------------------------------- */
+  --color-light: #FDFDFD;
+  --color-dark:  #07050A;
+
+  /* ----------------------------------------------------------
+     COLORS — Gradient accent (Purple transition)
+  ---------------------------------------------------------- */
+  --color-purple: #7A5FFF;
+
+  /* ----------------------------------------------------------
+     GRADIENTS
+  ---------------------------------------------------------- */
+  --gradient-primary:           linear-gradient(135deg, var(--color-primary-30), var(--color-primary-60));
+  --gradient-brand:             linear-gradient(135deg, var(--color-primary-60), var(--color-secondary-60));
+  --gradient-brand-with-purple: linear-gradient(135deg, var(--color-primary-60), var(--color-purple), var(--color-secondary-60));
+  --gradient-soft:              linear-gradient(135deg, var(--color-primary-20), var(--color-secondary-10));
+
+  /* ----------------------------------------------------------
+     TYPOGRAPHY
+  ---------------------------------------------------------- */
+  --font-base:   'Noto Sans', system-ui, sans-serif;   /* UI, body, forms */
+  --font-accent: 'Michroma', sans-serif;               /* Titles, headings only */
+
+  --font-size-xs:   0.75rem;   /*  12px */
+  --font-size-sm:   0.875rem;  /*  14px */
+  --font-size-base: 1rem;      /*  16px */
+  --font-size-lg:   1.125rem;  /*  18px */
+  --font-size-xl:   1.25rem;   /*  20px */
+  --font-size-2xl:  1.5rem;    /*  24px */
+  --font-size-3xl:  1.875rem;  /*  30px */
+  --font-size-4xl:  2.25rem;   /*  36px */
+
+  --font-weight-light:     300;
+  --font-weight-regular:   400;
+  --font-weight-medium:    500;
+  --font-weight-semibold:  600;
+
+  --line-height-tight:  1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* ----------------------------------------------------------
+     SPACING
+  ---------------------------------------------------------- */
+  --space-1:  0.25rem;   /*  4px */
+  --space-2:  0.5rem;    /*  8px */
+  --space-3:  0.75rem;   /* 12px */
+  --space-4:  1rem;      /* 16px */
+  --space-5:  1.25rem;   /* 20px */
+  --space-6:  1.5rem;    /* 24px */
+  --space-8:  2rem;      /* 32px */
+  --space-10: 2.5rem;    /* 40px */
+  --space-12: 3rem;      /* 48px */
+  --space-16: 4rem;      /* 64px */
+
+  /* ----------------------------------------------------------
+     BORDER RADIUS
+  ---------------------------------------------------------- */
+  --radius-sm:   0.25rem;   /*  4px */
+  --radius-md:   0.5rem;    /*  8px */
+  --radius-lg:   0.75rem;   /* 12px */
+  --radius-xl:   1rem;      /* 16px */
+  --radius-full: 9999px;
+
+  /* ----------------------------------------------------------
+     SHADOWS (Primary-60 based, never pure black)
+  ---------------------------------------------------------- */
+  --shadow-sm:  0 1px 3px 0 rgba(28, 94, 254, 0.08);
+  --shadow-md:  0 4px 12px 0 rgba(28, 94, 254, 0.12);
+  --shadow-lg:  0 8px 24px 0 rgba(28, 94, 254, 0.16);
+  --shadow-xl:  0 16px 40px 0 rgba(28, 94, 254, 0.20);
+
+  /* Dark background variant */
+  --shadow-dark-sm: 0 1px 3px 0 rgba(7, 5, 10, 0.20);
+  --shadow-dark-md: 0 4px 12px 0 rgba(7, 5, 10, 0.30);
+
+  /* ----------------------------------------------------------
+     FOCUS RING
+  ---------------------------------------------------------- */
+  --focus-ring: 0 0 0 3px rgba(28, 94, 254, 0.30);
+
+  /* ----------------------------------------------------------
+     TRANSITIONS
+  ---------------------------------------------------------- */
+  --transition-fast:   150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow:   400ms ease;
+}

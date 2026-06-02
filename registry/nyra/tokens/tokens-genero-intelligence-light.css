@@ -1,0 +1,135 @@
+/* ============================================================
+   Nyra UI — Thème Genero Intelligence Light
+   Usage : [data-theme="genero-intelligence-light"]
+   Police : Noto Sans
+   Primary : #1C5EFE (identique à GeneroEnterprise)
+   Secondary : #21E0F4 (cyan — différent de GeneroEnterprise)
+   Source : Figma "Nyra - Genero Design system" · mode GeneroIntelligence-Light
+   ============================================================ */
+
+[data-theme="genero-intelligence-light"] {
+
+  /* ----------------------------------------------------------
+     FONT (identique à GeneroEnterprise)
+  ---------------------------------------------------------- */
+  --font-base: 'Noto Sans', system-ui, sans-serif;
+
+  /* ----------------------------------------------------------
+     PRIMITIVES — Primary (identique à GeneroEnterprise)
+  ---------------------------------------------------------- */
+  --primitive-primary-10:  #F4F7FF;
+  --primitive-primary-20:  #E8EFFF;
+  --primitive-primary-30:  #CFDDFF;
+  --primitive-primary-40:  #A4BFFF;
+  --primitive-primary-50:  #82A6FE;
+  --primitive-primary-60:  #1C5EFE;
+  --primitive-primary-70:  #1545BB;
+  --primitive-primary-80:  #10358F;
+  --primitive-primary-90:  #0D2C79;
+  --primitive-primary-100: #081C4C;
+  --primitive-primary-110: #051130;
+
+  /* ----------------------------------------------------------
+     PRIMITIVES — Secondary (Cyan — spécifique GeneroIntelligence)
+     Palette dérivée de #21E0F4
+  ---------------------------------------------------------- */
+  --primitive-secondary-10:  #F0FEFF;
+  --primitive-secondary-20:  #DDFCFE;
+  --primitive-secondary-30:  #B8F6FC;
+  --primitive-secondary-40:  #7EEEF8;
+  --primitive-secondary-50:  #4DE8F6;
+  --primitive-secondary-60:  #21E0F4; /* ⭐ Valeur Figma */
+  --primitive-secondary-70:  #17A8B8;
+  --primitive-secondary-80:  #0F7A87;
+  --primitive-secondary-90:  #085663;
+  --primitive-secondary-100: #04333B;
+  --primitive-secondary-110: #021C22;
+
+  /* ----------------------------------------------------------
+     PRIMITIVES — Grey (identique à GeneroEnterprise)
+  ---------------------------------------------------------- */
+  --primitive-grey-10:  #F7F7F9;
+  --primitive-grey-20:  #EFEFF3;
+  --primitive-grey-30:  #D8D8E1;
+  --primitive-grey-40:  #C8C8D5;
+  --primitive-grey-50:  #A9A9BD;
+  --primitive-grey-60:  #737394;
+  --primitive-grey-70:  #636388;
+  --primitive-grey-80:  #474761;
+  --primitive-grey-90:  #303041;
+  --primitive-grey-100: #191921;
+  --primitive-grey-110: #0D0D10;
+
+  /* ----------------------------------------------------------
+     TOKENS SÉMANTIQUES — Fond
+  ---------------------------------------------------------- */
+  --color-bg-page:    #FFFFFF;
+  --color-bg-surface: #F7F7F9;
+  --color-bg-raised:  #FDFDFD;
+  --color-bg-overlay: rgba(7, 5, 10, 0.40);
+
+  /* ----------------------------------------------------------
+     TOKENS SÉMANTIQUES — Texte
+  ---------------------------------------------------------- */
+  --color-text-primary:    #07050A;
+  --color-text-secondary:  #474761;
+  --color-text-muted:      #737394;
+  --color-text-disabled:   #A9A9BD;
+  --color-text-inverse:    #FDFDFD;
+  --color-text-on-primary: #FDFDFD;
+
+  /* ----------------------------------------------------------
+     TOKENS SÉMANTIQUES — Interactif (Primary)
+  ---------------------------------------------------------- */
+  --color-interactive-default: #1C5EFE;
+  --color-interactive-hover:   #1545BB;
+  --color-interactive-active:  #10358F;
+  --color-interactive-subtle:  #E8EFFF;
+  --color-interactive-muted:   #CFDDFF;
+
+  /* ----------------------------------------------------------
+     TOKENS SÉMANTIQUES — Accent (Cyan)
+  ---------------------------------------------------------- */
+  --color-accent-default: #21E0F4;
+  --color-accent-hover:   #17A8B8;
+  --color-accent-active:  #0F7A87;
+  --color-accent-subtle:  #DDFCFE;
+  --color-text-on-accent: #07050A; /* texte sombre sur fond cyan (contraste) */
+
+  /* ----------------------------------------------------------
+     TOKENS SÉMANTIQUES — Bordures
+  ---------------------------------------------------------- */
+  --color-border-default:  #D8D8E1;
+  --color-border-strong:   #A9A9BD;
+  --color-border-focus:    #1C5EFE;
+  --color-border-error:    #FF3B2F;
+
+  /* ----------------------------------------------------------
+     TOKENS SÉMANTIQUES — États fonctionnels
+  ---------------------------------------------------------- */
+  --color-error:          #FF3B2F;
+  --color-error-subtle:   #FFF0EF;
+  --color-success:        #35C759;
+  --color-success-subtle: #EAF9EE;
+  --color-warning:        #FF943C;
+  --color-warning-subtle: #FFF4EA;
+  --color-info:           #1C5EFE;
+  --color-info-subtle:    #E8EFFF;
+
+  /* ----------------------------------------------------------
+     OMBRES
+  ---------------------------------------------------------- */
+  --shadow-sm: 0 1px 3px 0 rgba(28, 94, 254, 0.08);
+  --shadow-md: 0 4px 12px 0 rgba(28, 94, 254, 0.12);
+  --shadow-lg: 0 8px 24px 0 rgba(28, 94, 254, 0.16);
+  --shadow-xl: 0 16px 40px 0 rgba(28, 94, 254, 0.20);
+
+  --focus-ring-color: rgba(28, 94, 254, 0.30);
+  --focus-ring-width: 3px;
+
+  /* ----------------------------------------------------------
+     GRADIENTS
+  ---------------------------------------------------------- */
+  --gradient-brand:   linear-gradient(135deg, #1C5EFE, #21E0F4);
+  --gradient-primary: linear-gradient(135deg, #CFDDFF, #1C5EFE);
+}

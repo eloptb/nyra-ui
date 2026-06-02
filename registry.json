@@ -4,76 +4,73 @@
   "homepage": "https://nyra-ui.vercel.app",
   "items": [
     {
+      "name": "tokens",
+      "type": "registry:file",
+      "title": "Design Tokens",
+      "description": "Variables CSS Nyra UI — requis par tous les composants. Inclut les 6 thèmes : GeneroEnterprise Light/Dark, GeneroIntelligence Light/Dark, ReportWriter, Four Js.",
+      "files": [
+        { "path": "registry/nyra/tokens/tokens-base.css",                        "type": "registry:file", "target": "app/nyra/tokens-base.css" },
+        { "path": "registry/nyra/tokens/tokens-light.css",                       "type": "registry:file", "target": "app/nyra/tokens-light.css" },
+        { "path": "registry/nyra/tokens/tokens-dark.css",                        "type": "registry:file", "target": "app/nyra/tokens-dark.css" },
+        { "path": "registry/nyra/tokens/tokens-report-writer.css",               "type": "registry:file", "target": "app/nyra/tokens-report-writer.css" },
+        { "path": "registry/nyra/tokens/tokens-four-js.css",                     "type": "registry:file", "target": "app/nyra/tokens-four-js.css" },
+        { "path": "registry/nyra/tokens/tokens-genero-intelligence-light.css",   "type": "registry:file", "target": "app/nyra/tokens-genero-intelligence-light.css" },
+        { "path": "registry/nyra/tokens/tokens-genero-intelligence-dark.css",    "type": "registry:file", "target": "app/nyra/tokens-genero-intelligence-dark.css" }
+      ]
+    },
+    {
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
-      "description": "Bouton Nyra UI — 4 variantes (primary, secondary, ghost, danger), 3 tailles, état loading.",
+      "description": "Bouton Nyra UI — 4 variantes (primary, secondary, ghost, danger), 3 tailles, état loading. Nécessite les tokens Nyra UI.",
+      "registryDependencies": ["tokens"],
       "files": [
-        {
-          "path": "registry/nyra/button/button.tsx",
-          "type": "registry:ui"
-        }
+        { "path": "registry/nyra/button/button.tsx",         "type": "registry:ui" },
+        { "path": "registry/nyra/button/button.README.md",   "type": "registry:file", "target": "app/nyra/button.README.md" }
       ]
     },
     {
       "name": "input",
       "type": "registry:ui",
       "title": "Input",
-      "description": "Champ texte Nyra UI — label, hint, message d'erreur, icônes.",
+      "description": "Champ texte Nyra UI — label, hint, message d'erreur, icônes gauche/droite. Nécessite les tokens Nyra UI.",
+      "registryDependencies": ["tokens"],
       "files": [
-        {
-          "path": "registry/nyra/input/input.tsx",
-          "type": "registry:ui"
-        }
+        { "path": "registry/nyra/input/input.tsx",         "type": "registry:ui" },
+        { "path": "registry/nyra/input/input.README.md",   "type": "registry:file", "target": "app/nyra/input.README.md" }
       ]
     },
     {
       "name": "select",
       "type": "registry:ui",
       "title": "Select",
-      "description": "Menu déroulant Nyra UI — label, hint, erreur, placeholder.",
+      "description": "Menu déroulant Nyra UI — label, hint, erreur, placeholder. Nécessite les tokens Nyra UI.",
+      "registryDependencies": ["tokens"],
       "files": [
-        {
-          "path": "registry/nyra/select/select.tsx",
-          "type": "registry:ui"
-        }
+        { "path": "registry/nyra/select/select.tsx",         "type": "registry:ui" },
+        { "path": "registry/nyra/select/select.README.md",   "type": "registry:file", "target": "app/nyra/select.README.md" }
       ]
     },
     {
       "name": "checkbox",
       "type": "registry:ui",
       "title": "Checkbox",
-      "description": "Case à cocher Nyra UI — label, hint, erreur, états disabled.",
+      "description": "Case à cocher Nyra UI — label, hint, erreur, états disabled. Nécessite les tokens Nyra UI.",
+      "registryDependencies": ["tokens"],
       "files": [
-        {
-          "path": "registry/nyra/checkbox/checkbox.tsx",
-          "type": "registry:ui"
-        }
+        { "path": "registry/nyra/checkbox/checkbox.tsx",         "type": "registry:ui" },
+        { "path": "registry/nyra/checkbox/checkbox.README.md",   "type": "registry:file", "target": "app/nyra/checkbox.README.md" }
       ]
     },
     {
       "name": "label",
       "type": "registry:ui",
       "title": "Label",
-      "description": "Label Nyra UI — indicateur requis (*) inclus.",
+      "description": "Label Nyra UI — indicateur requis (*) inclus. Nécessite les tokens Nyra UI.",
+      "registryDependencies": ["tokens"],
       "files": [
-        {
-          "path": "registry/nyra/label/label.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "tokens",
-      "type": "registry:file",
-      "title": "Design Tokens",
-      "description": "Variables CSS Genero Enterprise — couleurs, typo, espacements, ombres, gradients.",
-      "files": [
-        {
-          "path": "registry/nyra/tokens/tokens.css",
-          "type": "registry:file",
-          "target": "app/nyra-tokens.css"
-        }
+        { "path": "registry/nyra/label/label.tsx",         "type": "registry:ui" },
+        { "path": "registry/nyra/label/label.README.md",   "type": "registry:file", "target": "app/nyra/label.README.md" }
       ]
     }
   ]

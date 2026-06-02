@@ -1,13 +1,15 @@
 "use client";
 import { useState } from "react";
 
-type Theme = "light" | "dark" | "report-writer" | "four-js";
+type Theme = "light" | "dark" | "report-writer" | "four-js" | "genero-intelligence-light" | "genero-intelligence-dark";
 
 const THEMES: { id: Theme; label: string; font: string; color: string }[] = [
-  { id: "light",         label: "Light",         font: "Noto Sans",  color: "#1C5EFE" },
-  { id: "dark",          label: "Dark",           font: "Noto Sans",  color: "#1C5EFE" },
-  { id: "report-writer", label: "Report Writer",  font: "Raleway",    color: "#AA2B1D" },
-  { id: "four-js",       label: "Four Js",        font: "Open Sans",  color: "#08A4D3" },
+  { id: "light",                      label: "GE Light",    font: "Noto Sans",  color: "#1C5EFE" },
+  { id: "dark",                       label: "GE Dark",     font: "Noto Sans",  color: "#1C5EFE" },
+  { id: "genero-intelligence-light",  label: "GI Light",    font: "Noto Sans",  color: "#21E0F4" },
+  { id: "genero-intelligence-dark",   label: "GI Dark",     font: "Noto Sans",  color: "#21E0F4" },
+  { id: "report-writer",              label: "Report Writer", font: "Raleway",  color: "#AA2B1D" },
+  { id: "four-js",                    label: "Four Js",     font: "Open Sans",  color: "#08A4D3" },
 ];
 
 const FONTS = `
@@ -73,6 +75,30 @@ export default function Preview() {
           --shadow-sm: 0 1px 3px rgba(8,164,211,0.08); --shadow-md: 0 4px 12px rgba(8,164,211,0.14);
           --focus-ring-color: rgba(8,164,211,0.28); --focus-ring-width: 3px;
           --gradient-brand: linear-gradient(135deg, #08A4D3, #EC6A58);
+        }
+        [data-theme="genero-intelligence-light"] {
+          --font-base: 'Noto Sans', system-ui, sans-serif;
+          --color-bg-page: #FFFFFF; --color-bg-surface: #F7F7F9; --color-bg-raised: #FDFDFD;
+          --color-text-primary: #07050A; --color-text-secondary: #474761; --color-text-muted: #737394; --color-text-on-primary: #FDFDFD;
+          --color-interactive-default: #1C5EFE; --color-interactive-hover: #1545BB; --color-interactive-subtle: #E8EFFF;
+          --color-accent-default: #21E0F4; --color-accent-hover: #17A8B8; --color-accent-subtle: #DDFCFE;
+          --color-border-default: #D8D8E1; --color-border-focus: #1C5EFE; --color-border-error: #FF3B2F;
+          --color-error: #FF3B2F; --color-error-subtle: #FFF0EF;
+          --shadow-sm: 0 1px 3px rgba(28,94,254,0.08); --shadow-md: 0 4px 12px rgba(28,94,254,0.14);
+          --focus-ring-color: rgba(28,94,254,0.28); --focus-ring-width: 3px;
+          --gradient-brand: linear-gradient(135deg, #1C5EFE, #21E0F4);
+        }
+        [data-theme="genero-intelligence-dark"] {
+          --font-base: 'Noto Sans', system-ui, sans-serif;
+          --color-bg-page: #07050A; --color-bg-surface: #0D0D10; --color-bg-raised: #191921;
+          --color-text-primary: #FFFFFF; --color-text-secondary: #A9A9BD; --color-text-muted: #737394; --color-text-on-primary: #FDFDFD;
+          --color-interactive-default: #1C5EFE; --color-interactive-hover: #82A6FE; --color-interactive-subtle: #081C4C;
+          --color-accent-default: #21E0F4; --color-accent-hover: #4DE8F6; --color-accent-subtle: #04333B;
+          --color-border-default: #303041; --color-border-focus: #1C5EFE; --color-border-error: #FF3B2F;
+          --color-error: #FF3B2F; --color-error-subtle: #1A0706;
+          --shadow-sm: 0 1px 3px rgba(0,0,0,0.3); --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+          --focus-ring-color: rgba(28,94,254,0.40); --focus-ring-width: 3px;
+          --gradient-brand: linear-gradient(135deg, #1C5EFE, #21E0F4);
         }
       `}</style>
 
@@ -246,10 +272,12 @@ export default function Preview() {
               <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: 24 }}>
                 {THEMES.find(t => t.id === theme) && (() => {
                   const palettes: Record<Theme, { primary: string[]; secondary: string[]; grey: string[] }> = {
-                    "light":         { primary: ["#F4F7FF","#E8EFFF","#CFDDFF","#A4BFFF","#82A6FE","#1C5EFE","#1545BB","#10358F","#0D2C79","#081C4C","#051130"], secondary: ["#FDEDF1","#FDE3E9","#FBD1DB","#F7A3B7","#F37593","#EF476F","#A93450","#7B273B","#642131","#35141C","#170B0E"], grey: ["#F7F7F9","#EFEFF3","#D8D8E1","#C8C8D5","#A9A9BD","#737394","#636388","#474761","#303041","#191921","#0D0D10"] },
-                    "dark":          { primary: ["#F4F7FF","#E8EFFF","#CFDDFF","#A4BFFF","#82A6FE","#1C5EFE","#1545BB","#10358F","#0D2C79","#081C4C","#051130"], secondary: ["#FFFFFF","#FDE3E9","#FBD1DB","#F7A3B7","#F37593","#EF476F","#A93450","#7B273B","#642131","#35141C","#170B0E"], grey: ["#F7F7F9","#EFEFF3","#D8D8E1","#C8C8D5","#A9A9BD","#737394","#636388","#474761","#303041","#191921","#0D0D10"] },
-                    "report-writer": { primary: ["#FBF4F4","#F6EAE9","#EDD2D0","#DDAAA5","#D08A83","#AA2B1D","#792016","#591912","#481510","#280E0B","#1B0806"], secondary: ["#FEF9F7","#FDF2EE","#FBE4DC","#F7CABC","#FAB7A5","#EC6A58","#A74F40","#7A4030","#633227","#351A17","#351A17"], grey: ["#FAFAFA","#F6F5F4","#ECEAE8","#DAD7D4","#CBC5C1","#A39A93","#746E69","#55514D","#45423F","#232323","#0D0D10"] },
-                    "four-js":       { primary: ["#ECF6FB","#D3EFF8","#A7DDF1","#74CBE9","#25BAE1","#08A4D3","#0091BB","#006785","#003E53","#001B25","#001118"], secondary: ["#FEF9F7","#FDF2EE","#FBE4DC","#F7CABC","#FAB7A5","#EC6A58","#A74F40","#7A4030","#633227","#351A17","#351A17"], grey: ["#F4F4F4","#DDDEDE","#D3D4D4","#BEBFBF","#A9AAAA","#949696","#808282","#5A5B5B","#363737","#161616","#0D0D0D"] },
+                    "light":                     { primary: ["#F4F7FF","#E8EFFF","#CFDDFF","#A4BFFF","#82A6FE","#1C5EFE","#1545BB","#10358F","#0D2C79","#081C4C","#051130"], secondary: ["#FDEDF1","#FDE3E9","#FBD1DB","#F7A3B7","#F37593","#EF476F","#A93450","#7B273B","#642131","#35141C","#170B0E"], grey: ["#F7F7F9","#EFEFF3","#D8D8E1","#C8C8D5","#A9A9BD","#737394","#636388","#474761","#303041","#191921","#0D0D10"] },
+                    "dark":                      { primary: ["#F4F7FF","#E8EFFF","#CFDDFF","#A4BFFF","#82A6FE","#1C5EFE","#1545BB","#10358F","#0D2C79","#081C4C","#051130"], secondary: ["#FFFFFF","#FDE3E9","#FBD1DB","#F7A3B7","#F37593","#EF476F","#A93450","#7B273B","#642131","#35141C","#170B0E"], grey: ["#F7F7F9","#EFEFF3","#D8D8E1","#C8C8D5","#A9A9BD","#737394","#636388","#474761","#303041","#191921","#0D0D10"] },
+                    "genero-intelligence-light":  { primary: ["#F4F7FF","#E8EFFF","#CFDDFF","#A4BFFF","#82A6FE","#1C5EFE","#1545BB","#10358F","#0D2C79","#081C4C","#051130"], secondary: ["#F0FEFF","#DDFCFE","#B8F6FC","#7EEEF8","#4DE8F6","#21E0F4","#17A8B8","#0F7A87","#085663","#04333B","#021C22"], grey: ["#F7F7F9","#EFEFF3","#D8D8E1","#C8C8D5","#A9A9BD","#737394","#636388","#474761","#303041","#191921","#0D0D10"] },
+                    "genero-intelligence-dark":   { primary: ["#F4F7FF","#E8EFFF","#CFDDFF","#A4BFFF","#82A6FE","#1C5EFE","#1545BB","#10358F","#0D2C79","#081C4C","#051130"], secondary: ["#F0FEFF","#DDFCFE","#B8F6FC","#7EEEF8","#4DE8F6","#21E0F4","#17A8B8","#0F7A87","#085663","#04333B","#021C22"], grey: ["#F7F7F9","#EFEFF3","#D8D8E1","#C8C8D5","#A9A9BD","#737394","#636388","#474761","#303041","#191921","#0D0D10"] },
+                    "report-writer":              { primary: ["#FBF4F4","#F6EAE9","#EDD2D0","#DDAAA5","#D08A83","#AA2B1D","#792016","#591912","#481510","#280E0B","#1B0806"], secondary: ["#FEF9F7","#FDF2EE","#FBE4DC","#F7CABC","#FAB7A5","#EC6A58","#A74F40","#7A4030","#633227","#351A17","#351A17"], grey: ["#FAFAFA","#F6F5F4","#ECEAE8","#DAD7D4","#CBC5C1","#A39A93","#746E69","#55514D","#45423F","#232323","#0D0D10"] },
+                    "four-js":                    { primary: ["#ECF6FB","#D3EFF8","#A7DDF1","#74CBE9","#25BAE1","#08A4D3","#0091BB","#006785","#003E53","#001B25","#001118"], secondary: ["#FEF9F7","#FDF2EE","#FBE4DC","#F7CABC","#FAB7A5","#EC6A58","#A74F40","#7A4030","#633227","#351A17","#351A17"], grey: ["#F4F4F4","#DDDEDE","#D3D4D4","#BEBFBF","#A9AAAA","#949696","#808282","#5A5B5B","#363737","#161616","#0D0D0D"] },
                   };
                   const p = palettes[theme];
                   const labels = ["10","20","30","40","50","60","70","80","90","100","110"];

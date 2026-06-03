@@ -53,6 +53,8 @@ export default function Preview() {
           --color-btn-bg-disabled: #D8D8E1; --color-btn-text: #FDFDFD;
           --color-btn-border-1: #82A6FE; --color-btn-border-2: #1545BB;
           --color-btn-shadow: rgba(28,94,254,0.24);
+          --color-btn-outline-hover: rgba(28,94,254,0.08);
+          --color-btn-outline-pressed: rgba(28,94,254,0.14);
           --color-text-disabled: #A9A9BD;
         }
 
@@ -73,6 +75,8 @@ export default function Preview() {
           --color-btn-bg-disabled: #474761; --color-btn-text: #FDFDFD;
           --color-btn-border-1: #82A6FE; --color-btn-border-2: #A4BFFF;
           --color-btn-shadow: rgba(28,94,254,0.34);
+          --color-btn-outline-hover: rgba(28,94,254,0.12);
+          --color-btn-outline-pressed: rgba(28,94,254,0.20);
           --color-text-disabled: #474761;
         }
 
@@ -93,6 +97,8 @@ export default function Preview() {
           --color-btn-bg-disabled: #D8D8E1; --color-btn-text: #FFFFFF;
           --color-btn-border-1: #D08A83; --color-btn-border-2: #792016;
           --color-btn-shadow: rgba(170,43,29,0.24);
+          --color-btn-outline-hover: rgba(170,43,29,0.08);
+          --color-btn-outline-pressed: rgba(170,43,29,0.14);
           --color-text-disabled: #CBC5C1;
         }
 
@@ -113,6 +119,8 @@ export default function Preview() {
           --color-btn-bg-disabled: #D3D4D4; --color-btn-text: #07050A;
           --color-btn-border-1: #25BAE1; --color-btn-border-2: #0091BB;
           --color-btn-shadow: rgba(8,164,211,0.24);
+          --color-btn-outline-hover: rgba(8,164,211,0.08);
+          --color-btn-outline-pressed: rgba(8,164,211,0.14);
           --color-text-disabled: #BEBFBF;
         }
 
@@ -133,6 +141,8 @@ export default function Preview() {
           --color-btn-bg-disabled: #D8D8E1; --color-btn-text: #FDFDFD;
           --color-btn-border-1: #82A6FE; --color-btn-border-2: #1545BB;
           --color-btn-shadow: rgba(28,94,254,0.24);
+          --color-btn-outline-hover: rgba(28,94,254,0.08);
+          --color-btn-outline-pressed: rgba(28,94,254,0.14);
           --color-text-disabled: #A9A9BD;
         }
 
@@ -153,6 +163,8 @@ export default function Preview() {
           --color-btn-bg-disabled: #474761; --color-btn-text: #FDFDFD;
           --color-btn-border-1: #82A6FE; --color-btn-border-2: #A4BFFF;
           --color-btn-shadow: rgba(28,94,254,0.34);
+          --color-btn-outline-hover: rgba(28,94,254,0.12);
+          --color-btn-outline-pressed: rgba(28,94,254,0.20);
           --color-text-disabled: #474761;
         }
       `}</style>
@@ -234,35 +246,46 @@ export default function Preview() {
                   <p style={{ fontSize: 13, color: "var(--color-text-muted)", margin: 0 }}>Hover, click, focus avec Tab pour tester les états</p>
                 </div>
 
-                {/* Bouton interactif — utilise le vrai composant avec CSS injection */}
-                <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
-                  <Button size="m" leftIcon={<span>+</span>}>Call to action</Button>
-                  <Button variant="icon-primary" size="m" icon={<span>+</span>} aria-label="Ajouter" />
+                {/* Boutons interactifs — vrais composants avec CSS injection */}
+                <div style={{ display: "flex", flexDirection: "column", gap: 24, width: "100%", alignItems: "center" }}>
+
+                  {/* Default */}
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+                    <span style={{ fontSize: 11, color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.08em" }}>Default</span>
+                    <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+                      <Button size="m" leftIcon={<span>+</span>}>Call to action</Button>
+                      <Button variant="icon-primary" size="m" icon={<span>+</span>} aria-label="Ajouter" />
+                    </div>
+                  </div>
+
+                  <div style={{ width: "100%", height: 1, background: "var(--color-border-default)" }} />
+
+                  {/* Outline */}
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+                    <span style={{ fontSize: 11, color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.08em" }}>Outline</span>
+                    <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+                      <Button variant="outline" size="m" leftIcon={<span>+</span>}>Call to action</Button>
+                      <Button variant="icon-outline" size="m" icon={<span>+</span>} aria-label="Ajouter" />
+                    </div>
+                  </div>
                 </div>
 
-                {/* Légende des états */}
-                <div style={{ display: "flex", gap: 20, fontSize: 12, color: "var(--color-text-muted)" }}>
-                  {[
-                    { dot: "var(--color-btn-bg, #1C5EFE)",         label: "Default" },
-                    { dot: "var(--color-btn-bg-hover, #123284)",    label: "Hover" },
-                    { dot: "var(--color-btn-bg-pressed, #0B2165)", label: "Pressed" },
-                    { dot: "var(--focus-ring-color, rgba(28,94,254,0.4))", label: "Focus" },
-                    { dot: "var(--color-btn-bg-disabled, #D8D8E1)", label: "Disabled" },
-                  ].map(({ dot, label }) => (
-                    <div key={label} style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                      <div style={{ width: 8, height: 8, borderRadius: "50%", background: dot, flexShrink: 0 }} />
-                      {label}
-                    </div>
+                {/* Légende */}
+                <div style={{ display: "flex", gap: 20, fontSize: 12, color: "var(--color-text-muted)", flexWrap: "wrap", justifyContent: "center" }}>
+                  {["Default", "Hover", "Pressed", "Focus", "Disabled"].map(label => (
+                    <span key={label}>{label}</span>
                   ))}
                 </div>
               </div>
 
               {/* Disabled */}
-              <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: "24px 32px", display: "flex", alignItems: "center", gap: 24 }}>
-                <p style={{ fontSize: 13, color: "var(--color-text-muted)", margin: 0, flexShrink: 0 }}>Disabled</p>
-                <div style={{ display: "flex", gap: 12 }}>
+              <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: "20px 28px", display: "flex", alignItems: "center", gap: 24 }}>
+                <p style={{ fontSize: 11, color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.08em", margin: 0, flexShrink: 0 }}>Disabled</p>
+                <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
                   <Button size="m" disabled leftIcon={<span>+</span>}>Call to action</Button>
                   <Button variant="icon-primary" size="m" disabled icon={<span>+</span>} aria-label="Ajouter" />
+                  <Button variant="outline" size="m" disabled leftIcon={<span>+</span>}>Call to action</Button>
+                  <Button variant="icon-outline" size="m" disabled icon={<span>+</span>} aria-label="Ajouter" />
                 </div>
               </div>
             </section>

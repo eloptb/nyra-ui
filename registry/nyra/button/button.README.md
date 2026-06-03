@@ -1,10 +1,6 @@
 # Button — Nyra UI
 
-## Prérequis
-
-- React 18+
-- TypeScript
-- Les tokens Nyra UI installés et importés (installés automatiquement avec ce composant)
+Source Figma : [node 133:4518](https://www.figma.com/design/7THVM7NP1y1rli5iEB9bc5/Nyra---Genero-Design-system?node-id=133-4518)
 
 ## Installation
 
@@ -14,7 +10,7 @@ npx shadcn@latest add https://nyra-ui.vercel.app/r/button.json
 
 Les tokens CSS sont installés automatiquement dans `app/nyra/`.
 
-## Import dans ton projet
+## Import
 
 ```tsx
 import { Button } from "@/components/ui/button"
@@ -22,50 +18,77 @@ import { Button } from "@/components/ui/button"
 
 ## Activer un thème
 
-Dans ton fichier CSS global, importe les tokens du thème voulu :
-
 ```css
-/* Choisir UN seul thème */
+/* Dans ton CSS global — choisir UN thème */
 @import "./nyra/tokens-base.css";
-@import "./nyra/tokens-light.css";               /* GeneroEnterprise Light */
-/* @import "./nyra/tokens-dark.css";             /* GeneroEnterprise Dark */
-/* @import "./nyra/tokens-genero-intelligence-light.css"; */
-/* @import "./nyra/tokens-genero-intelligence-dark.css";  */
-/* @import "./nyra/tokens-report-writer.css";    */
-/* @import "./nyra/tokens-four-js.css";          */
+@import "./nyra/tokens-light.css";
 ```
 
-Puis sur ton `<body>` ou le conteneur racine :
-
 ```html
-<body data-theme="light">        <!-- GeneroEnterprise Light -->
-<body data-theme="dark">         <!-- GeneroEnterprise Dark -->
-<body data-theme="genero-intelligence-light">
-<body data-theme="genero-intelligence-dark">
-<body data-theme="report-writer">
-<body data-theme="four-js">
+<body data-theme="light">
 ```
 
 ## Utilisation
 
+### Boutons avec texte
+
 ```tsx
-<Button variant="primary">Enregistrer</Button>
-<Button variant="secondary">Annuler</Button>
-<Button variant="ghost">En savoir plus</Button>
-<Button variant="danger">Supprimer</Button>
+{/* Types */}
+<Button variant="default">Call to action</Button>
+<Button variant="white-fill">Call to action</Button>
+<Button variant="outline">Call to action</Button>
+<Button variant="outline-classic">Call to action</Button>
+<Button variant="link">Call to action</Button>
+
+{/* Avec icônes */}
+<Button variant="default" leftIcon={<PlusIcon />}>Ajouter</Button>
+<Button variant="outline" rightIcon={<ArrowIcon />}>Voir plus</Button>
+
+{/* Tailles */}
+<Button size="xs">XS</Button>
+<Button size="s">Small</Button>
+<Button size="m">Medium</Button>
+<Button size="l">Large</Button>
+
+{/* États */}
 <Button loading>Chargement...</Button>
 <Button disabled>Désactivé</Button>
-<Button size="sm">Petit</Button>
-<Button size="lg">Grand</Button>
 ```
+
+### Boutons icône uniquement
+
+```tsx
+<Button variant="icon-primary"          icon={<PlusIcon />} aria-label="Ajouter" />
+<Button variant="icon-outline"          icon={<PlusIcon />} aria-label="Ajouter" />
+<Button variant="icon-outline-classic"  icon={<PlusIcon />} aria-label="Ajouter" />
+<Button variant="icon-link"             icon={<PlusIcon />} aria-label="Ajouter" />
+```
+
+> ⚠️ Pour les variantes `icon-*`, toujours ajouter un `aria-label` pour l'accessibilité.
 
 ## Props
 
 | Prop | Type | Défaut | Description |
 |------|------|--------|-------------|
-| `variant` | `primary` \| `secondary` \| `ghost` \| `danger` | `primary` | Style visuel |
-| `size` | `sm` \| `md` \| `lg` | `md` | Taille |
-| `loading` | `boolean` | `false` | Affiche un spinner, désactive le bouton |
-| `leftIcon` | `ReactNode` | — | Icône à gauche du texte |
-| `rightIcon` | `ReactNode` | — | Icône à droite du texte |
-| `disabled` | `boolean` | `false` | Désactive le bouton |
+| `variant` | `ButtonType` | `"default"` | Style visuel (voir tableau ci-dessous) |
+| `size` | `"xs"` \| `"s"` \| `"m"` \| `"l"` | `"m"` | Taille |
+| `loading` | `boolean` | `false` | Spinner + désactivé |
+| `leftIcon` | `ReactNode` | — | Icône avant le texte |
+| `rightIcon` | `ReactNode` | — | Icône après le texte |
+| `icon` | `ReactNode` | — | Icône pour les variantes `icon-*` |
+| `htmlType` | `"button"` \| `"submit"` \| `"reset"` | `"button"` | Attribut `type` natif |
+| `disabled` | `boolean` | `false` | Désactivé |
+
+## Variantes
+
+| `variant` | Description | Usage |
+|-----------|-------------|-------|
+| `default` | Fond plein couleur interactive | Action principale |
+| `white-fill` | Fond blanc, bordure gradient | Sur fonds colorés |
+| `outline` | Contour rectangulaire | Action secondaire |
+| `outline-classic` | Contour pill (border-radius full) | Style arrondi |
+| `link` | Texte seul, sans fond ni bordure | Action tertiaire / liens |
+| `icon-primary` | Icône seule, fond plein | Action principale compacte |
+| `icon-outline` | Icône seule, contour rectangulaire | Action secondaire compacte |
+| `icon-outline-classic` | Icône seule, contour pill | Style arrondi compact |
+| `icon-link` | Icône seule, texte | Action tertiaire compacte |

@@ -531,8 +531,6 @@ export default function Preview() {
                   ))}
                 </div>
               </div>
-            </section>
-
             </section>}
 
           </main>

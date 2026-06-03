@@ -1,6 +1,8 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/registry/nyra/button/button";
+
+type Page = "button" | "input" | "select" | "checkbox" | "couleurs" | "typographie";
 
 type Theme = "light" | "dark" | "report-writer" | "four-js" | "genero-intelligence-light" | "genero-intelligence-dark";
 
@@ -19,6 +21,7 @@ const FONTS = `
 
 export default function Preview() {
   const [theme, setTheme] = useState<Theme>("light");
+  const [page, setPage] = useState<Page>("button");
 
   return (
     <>
@@ -192,19 +195,36 @@ export default function Preview() {
           {/* SIDEBAR */}
           <aside style={{ borderRight: "1px solid var(--color-border-default)", padding: "28px 16px", position: "sticky", top: 56, height: "calc(100vh - 56px)", overflowY: "auto" }}>
             <p style={{ fontSize: 10, color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.1em", margin: "0 0 12px 8px" }}>Composants</p>
-            {["Overview", "Button", "Input", "Select", "Checkbox", "Couleurs", "Typographie"].map(item => (
-              <a key={item} href={`#${item.toLowerCase()}`}
-                style={{ display: "block", padding: "6px 10px", borderRadius: "var(--radius-md)", fontSize: 14, color: "var(--color-text-secondary)", textDecoration: "none", marginBottom: 2, transition: "color var(--transition-base)" }}>
-                {item}
-              </a>
-            ))}
+            {(["button", "input", "select", "checkbox", "couleurs", "typographie"] as Page[]).map(p => {
+              const active = page === p;
+              return (
+                <button key={p} onClick={() => setPage(p)} style={{
+                  display: "block", width: "100%", textAlign: "left",
+                  padding: "7px 10px", borderRadius: "var(--radius-md)", fontSize: 14,
+                  color: active ? "var(--color-text-primary)" : "var(--color-text-secondary)",
+                  background: active ? "var(--color-interactive-subtle, #E8EFFF)" : "transparent",
+                  fontWeight: active ? 500 : 400,
+                  border: "none", cursor: "pointer", marginBottom: 2,
+                  fontFamily: "var(--font-base)",
+                  textTransform: "capitalize",
+                  transition: "all 120ms ease",
+                }}>
+                  {p === "couleurs" ? "Couleurs" : p === "typographie" ? "Typographie" : p.charAt(0).toUpperCase() + p.slice(1)}
+                </button>
+              );
+            })}
           </aside>
 
           {/* CONTENT */}
-          <main style={{ padding: "40px 48px", maxWidth: 880 }}>
+          <main style={{ padding: "40px 48px", maxWidth: 880, overflowY: "auto", height: "calc(100vh - 56px)" }}>
 
-            {/* ── OVERVIEW ── */}
-            <section id="overview" style={{ marginBottom: 64 }}>
+            {/* ── BUTTON PAGE : Overview + détails ── */}
+            {page === "button" && <section id="button" style={{ marginBottom: 56 }}>
+              <h1 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 18, color: "var(--color-text-primary)", margin: "0 0 4px" }}>Button</h1>
+              <p style={{ fontSize: 13, color: "var(--color-text-muted)", margin: "0 0 32px" }}>Type: Default · Source Figma 133:4518</p>
+
+              {/* ── OVERVIEW ── */}
+            <section style={{ marginBottom: 32 }}>
               <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid var(--color-border-default)" }}>Overview</h2>
 
               {/* Hero interactif */}
@@ -247,9 +267,9 @@ export default function Preview() {
               </div>
             </section>
 
-            {/* ── BUTTON · Default ── */}
-            <section id="button" style={{ marginBottom: 56 }}>
-              <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid var(--color-border-default)" }}>Button — Default</h2>
+              {/* ── DÉTAILS ── */}
+            <section style={{ marginBottom: 0 }}>
+              <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid var(--color-border-default)" }}>Détails</h2>
 
               {(() => {
                 const btn = (label: string, extraStyle: React.CSSProperties = {}) => (
@@ -336,10 +356,12 @@ export default function Preview() {
                 );
               })()}
             </section>
+            </section>}
 
-            {/* ── INPUT ── */}
-            <section id="input" style={{ marginBottom: 56 }}>
-              <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid var(--color-border-default)" }}>Input</h2>
+            {/* ── INPUT PAGE ── */}
+            {page === "input" && <section style={{ marginBottom: 56 }}>
+              <h1 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 18, color: "var(--color-text-primary)", margin: "0 0 32px" }}>Input</h1>
+              <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid var(--color-border-default)" }}>États & variantes</h2>
               <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: 24 }}>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
                   {[
@@ -361,11 +383,12 @@ export default function Preview() {
                   ))}
                 </div>
               </div>
-            </section>
+            </section>}
 
-            {/* ── SELECT ── */}
-            <section id="select" style={{ marginBottom: 56 }}>
-              <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid var(--color-border-default)" }}>Select</h2>
+            {/* ── SELECT PAGE ── */}
+            {page === "select" && <section style={{ marginBottom: 56 }}>
+              <h1 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 18, color: "var(--color-text-primary)", margin: "0 0 32px" }}>Select</h1>
+              <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid var(--color-border-default)" }}>États & variantes</h2>
               <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: 24 }}>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
                   <div>
@@ -393,11 +416,12 @@ export default function Preview() {
                   </div>
                 </div>
               </div>
-            </section>
+            </section>}
 
-            {/* ── CHECKBOX ── */}
-            <section id="checkbox" style={{ marginBottom: 56 }}>
-              <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid var(--color-border-default)" }}>Checkbox</h2>
+            {/* ── CHECKBOX PAGE ── */}
+            {page === "checkbox" && <section style={{ marginBottom: 56 }}>
+              <h1 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 18, color: "var(--color-text-primary)", margin: "0 0 32px" }}>Checkbox</h1>
+              <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid var(--color-border-default)" }}>États & variantes</h2>
               <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: 24, display: "flex", flexDirection: "column", gap: 16 }}>
                 {[
                   { label: "Option par défaut",  checked: false, error: false, disabled: false },
@@ -416,11 +440,12 @@ export default function Preview() {
                   </div>
                 ))}
               </div>
-            </section>
+            </section>}
 
-            {/* ── COULEURS ── */}
-            <section id="couleurs" style={{ marginBottom: 56 }}>
-              <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid var(--color-border-default)" }}>Couleurs</h2>
+            {/* ── COULEURS PAGE ── */}
+            {page === "couleurs" && <section style={{ marginBottom: 56 }}>
+              <h1 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 18, color: "var(--color-text-primary)", margin: "0 0 32px" }}>Couleurs</h1>
+              <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid var(--color-border-default)" }}>Palette</h2>
               <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: 24 }}>
                 {THEMES.find(t => t.id === theme) && (() => {
                   const palettes: Record<Theme, { primary: string[]; secondary: string[]; grey: string[] }> = {
@@ -452,11 +477,12 @@ export default function Preview() {
                   );
                 })()}
               </div>
-            </section>
+            </section>}
 
-            {/* ── TYPOGRAPHIE ── */}
-            <section id="typographie" style={{ marginBottom: 56 }}>
-              <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid var(--color-border-default)" }}>Typographie</h2>
+            {/* ── TYPOGRAPHIE PAGE ── */}
+            {page === "typographie" && <section style={{ marginBottom: 56 }}>
+              <h1 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 18, color: "var(--color-text-primary)", margin: "0 0 32px" }}>Typographie</h1>
+              <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid var(--color-border-default)" }}>Styles</h2>
               <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: 24 }}>
                 <div style={{ marginBottom: 24 }}>
                   <p style={{ fontSize: 11, color: "var(--color-text-muted)", marginBottom: 8, fontFamily: "var(--font-base)" }}>Michroma — titres marketing uniquement</p>
@@ -483,6 +509,8 @@ export default function Preview() {
                 </div>
               </div>
             </section>
+
+            </section>}
 
           </main>
         </div>

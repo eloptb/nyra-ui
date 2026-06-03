@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Button } from "@/registry/nyra/button/button";
 
 type Theme = "light" | "dark" | "report-writer" | "four-js" | "genero-intelligence-light" | "genero-intelligence-dark";
 
@@ -140,7 +141,7 @@ export default function Preview() {
           {/* SIDEBAR */}
           <aside style={{ borderRight: "1px solid var(--color-border-default)", padding: "28px 16px", position: "sticky", top: 56, height: "calc(100vh - 56px)", overflowY: "auto" }}>
             <p style={{ fontSize: 10, color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.1em", margin: "0 0 12px 8px" }}>Composants</p>
-            {["Button", "Input", "Select", "Checkbox", "Couleurs", "Typographie"].map(item => (
+            {["Overview", "Button", "Input", "Select", "Checkbox", "Couleurs", "Typographie"].map(item => (
               <a key={item} href={`#${item.toLowerCase()}`}
                 style={{ display: "block", padding: "6px 10px", borderRadius: "var(--radius-md)", fontSize: 14, color: "var(--color-text-secondary)", textDecoration: "none", marginBottom: 2, transition: "color var(--transition-base)" }}>
                 {item}
@@ -150,6 +151,50 @@ export default function Preview() {
 
           {/* CONTENT */}
           <main style={{ padding: "40px 48px", maxWidth: 880 }}>
+
+            {/* ── OVERVIEW ── */}
+            <section id="overview" style={{ marginBottom: 64 }}>
+              <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid var(--color-border-default)" }}>Overview</h2>
+
+              {/* Hero interactif */}
+              <div style={{ background: "var(--color-bg-surface)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: "48px 32px", display: "flex", flexDirection: "column", alignItems: "center", gap: 32, marginBottom: 24 }}>
+                <div style={{ textAlign: "center" }}>
+                  <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", margin: "0 0 8px" }}>Button · Default · M</p>
+                  <p style={{ fontSize: 13, color: "var(--color-text-muted)", margin: 0 }}>Hover, click, focus avec Tab pour tester les états</p>
+                </div>
+
+                {/* Bouton interactif — utilise le vrai composant avec CSS injection */}
+                <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
+                  <Button size="m" leftIcon={<span>+</span>}>Call to action</Button>
+                  <Button variant="icon-primary" size="m" icon={<span>+</span>} aria-label="Ajouter" />
+                </div>
+
+                {/* Légende des états */}
+                <div style={{ display: "flex", gap: 20, fontSize: 12, color: "var(--color-text-muted)" }}>
+                  {[
+                    { dot: "var(--color-btn-bg, #1C5EFE)",         label: "Default" },
+                    { dot: "var(--color-btn-bg-hover, #123284)",    label: "Hover" },
+                    { dot: "var(--color-btn-bg-pressed, #0B2165)", label: "Pressed" },
+                    { dot: "var(--focus-ring-color, rgba(28,94,254,0.4))", label: "Focus" },
+                    { dot: "var(--color-btn-bg-disabled, #D8D8E1)", label: "Disabled" },
+                  ].map(({ dot, label }) => (
+                    <div key={label} style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                      <div style={{ width: 8, height: 8, borderRadius: "50%", background: dot, flexShrink: 0 }} />
+                      {label}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Disabled */}
+              <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: "24px 32px", display: "flex", alignItems: "center", gap: 24 }}>
+                <p style={{ fontSize: 13, color: "var(--color-text-muted)", margin: 0, flexShrink: 0 }}>Disabled</p>
+                <div style={{ display: "flex", gap: 12 }}>
+                  <Button size="m" disabled leftIcon={<span>+</span>}>Call to action</Button>
+                  <Button variant="icon-primary" size="m" disabled icon={<span>+</span>} aria-label="Ajouter" />
+                </div>
+              </div>
+            </section>
 
             {/* ── BUTTON · Default ── */}
             <section id="button" style={{ marginBottom: 56 }}>

@@ -76,35 +76,45 @@ const CSS = `
 .nyra-btn-icon-s  { width:32px; height:32px; padding:0; font-size:16px; border-radius:8px;  }
 .nyra-btn-icon-xs { width:24px; height:24px; padding:0; font-size:14px; border-radius:8px;  }
 
-/* ── Gradient border + shadows (commun default & outline) ── */
-.nyra-btn-default, .nyra-btn-outline,
-.nyra-btn-icon-primary, .nyra-btn-icon-outline {
-  border: 1px solid transparent;
-  background-image:
-    linear-gradient(var(--nyra-fill, transparent), var(--nyra-fill, transparent)),
+/* ── DEFAULT & ICON-PRIMARY — gradient border + triple shadow ── */
+/*
+  Specs Figma 133:4986 :
+  - Fill     : button-color-main (primary-60)
+  - Border   : gradient 1px INSIDE (primary-50 → primary-70 → primary-50)
+  - Shadow   : y:7 blur:18 rgba(primary,24%) + inner white y:2 blur:4 + black y:2 blur:4
+*/
+.nyra-btn-default, .nyra-btn-icon-primary {
+  background:
+    linear-gradient(var(--color-btn-bg, #1C5EFE), var(--color-btn-bg, #1C5EFE)) padding-box,
     linear-gradient(135deg,
       var(--color-btn-border-1, #82A6FE) 0%,
       var(--color-btn-border-2, #1545BB) 50%,
       var(--color-btn-border-1, #82A6FE) 100%
-    );
-  background-origin: padding-box, border-box;
-  background-clip: padding-box, border-box;
+    ) border-box;
+  border: 1px solid transparent;
+  color: var(--color-btn-text, #FDFDFD);
   box-shadow:
     0 7px 18px var(--color-btn-shadow, rgba(28,94,254,0.24)),
     inset 0 2px 4px rgba(255,255,255,0.27),
     0 2px 4px rgba(0,0,0,0.25);
 }
-
-/* ── DEFAULT ── */
-.nyra-btn-default, .nyra-btn-icon-primary {
-  --nyra-fill: var(--color-btn-bg, #1C5EFE);
-  color: var(--color-btn-text, #FDFDFD);
-}
 .nyra-btn-default:hover, .nyra-btn-icon-primary:hover {
-  --nyra-fill: var(--color-btn-bg-hover, #123284);
+  background:
+    linear-gradient(var(--color-btn-bg-hover, #123284), var(--color-btn-bg-hover, #123284)) padding-box,
+    linear-gradient(135deg,
+      var(--color-btn-border-1, #82A6FE) 0%,
+      var(--color-btn-border-2, #1545BB) 50%,
+      var(--color-btn-border-1, #82A6FE) 100%
+    ) border-box;
 }
 .nyra-btn-default:active, .nyra-btn-icon-primary:active {
-  --nyra-fill: var(--color-btn-bg-pressed, #0B2165);
+  background:
+    linear-gradient(var(--color-btn-bg-pressed, #0B2165), var(--color-btn-bg-pressed, #0B2165)) padding-box,
+    linear-gradient(135deg,
+      var(--color-btn-border-1, #82A6FE) 0%,
+      var(--color-btn-border-2, #1545BB) 50%,
+      var(--color-btn-border-1, #82A6FE) 100%
+    ) border-box;
   box-shadow:
     0 2px 8px var(--color-btn-shadow, rgba(28,94,254,0.24)),
     inset 0 2px 4px rgba(255,255,255,0.27),
@@ -116,28 +126,32 @@ const CSS = `
   outline-offset: 2px;
 }
 .nyra-btn-default:disabled, .nyra-btn-icon-primary:disabled {
-  --nyra-fill: var(--color-btn-bg-disabled, #D8D8E1);
-  background-image:
-    linear-gradient(var(--nyra-fill), var(--nyra-fill)),
-    linear-gradient(var(--nyra-fill), var(--nyra-fill));
+  background: var(--color-btn-bg-disabled, #D8D8E1);
+  border-color: var(--color-btn-bg-disabled, #D8D8E1);
   color: var(--color-text-disabled, #A9A9BD);
   box-shadow: none; opacity: 0.4;
 }
 
-/* ── OUTLINE ── */
+/* ── OUTLINE & ICON-OUTLINE ── */
+/*
+  Specs Figma 3210:1988 :
+  - Fill     : aucun (transparent)
+  - Border   : 1px SOLID border-color-interactive (primary-60) — PAS un gradient
+  - Effets   : aucune ombre
+  - Texte    : text-button-color-main (primary-60 Light, blanc Dark)
+  - Hover    : fond state-color-hover = rgba(primary, 10%)
+*/
 .nyra-btn-outline, .nyra-btn-icon-outline {
-  --nyra-fill: transparent;
+  background: transparent;
+  border: 1px solid var(--color-interactive-default, #1C5EFE);
   color: var(--color-btn-bg, #1C5EFE);
+  box-shadow: none;
 }
 .nyra-btn-outline:hover, .nyra-btn-icon-outline:hover {
-  --nyra-fill: var(--color-btn-outline-hover, rgba(28,94,254,0.08));
+  background: var(--color-btn-outline-hover, rgba(28,94,254,0.08));
 }
 .nyra-btn-outline:active, .nyra-btn-icon-outline:active {
-  --nyra-fill: var(--color-btn-outline-pressed, rgba(28,94,254,0.14));
-  box-shadow:
-    0 2px 8px var(--color-btn-shadow, rgba(28,94,254,0.24)),
-    inset 0 2px 4px rgba(255,255,255,0.27),
-    0 1px 2px rgba(0,0,0,0.25);
+  background: var(--color-btn-outline-pressed, rgba(28,94,254,0.14));
   transform: translateY(1px);
 }
 .nyra-btn-outline:focus-visible, .nyra-btn-icon-outline:focus-visible {
@@ -145,10 +159,7 @@ const CSS = `
   outline-offset: 2px;
 }
 .nyra-btn-outline:disabled, .nyra-btn-icon-outline:disabled {
-  --nyra-fill: transparent;
-  background-image:
-    linear-gradient(var(--nyra-fill), var(--nyra-fill)),
-    linear-gradient(var(--color-btn-bg-disabled,#D8D8E1), var(--color-btn-bg-disabled,#D8D8E1));
+  border-color: var(--color-btn-bg-disabled, #D8D8E1);
   color: var(--color-text-disabled, #A9A9BD);
   box-shadow: none; opacity: 0.4;
 }

@@ -151,60 +151,94 @@ export default function Preview() {
           {/* CONTENT */}
           <main style={{ padding: "40px 48px", maxWidth: 880 }}>
 
-            {/* ── BUTTON ── */}
+            {/* ── BUTTON · Default ── */}
             <section id="button" style={{ marginBottom: 56 }}>
-              <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid var(--color-border-default)" }}>Button</h2>
+              <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid var(--color-border-default)" }}>Button — Default</h2>
 
-              {/* Types — avec texte */}
-              <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: 24, marginBottom: 12 }}>
-                <p style={{ fontSize: 11, color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.06em", margin: "0 0 14px" }}>Types</p>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 0 }}>
-                  {/* Default */}
-                  <button style={{ height: 36, padding: "0 16px", borderRadius: "var(--radius-md)", border: "none", background: "var(--color-interactive-default)", color: "var(--color-text-on-primary)", fontSize: 14, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-base)", boxShadow: "var(--shadow-md)" }}>+ Call to action</button>
-                  {/* White-fill */}
-                  <button style={{ height: 36, padding: "0 16px", borderRadius: "var(--radius-md)", border: "1px solid transparent", background: "linear-gradient(var(--color-bg-raised,#fff),var(--color-bg-raised,#fff)) padding-box, linear-gradient(135deg,var(--primitive-primary-50,#82A6FE),var(--primitive-primary-70,#1545BB)) border-box", color: "var(--color-interactive-default)", fontSize: 14, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-base)", boxShadow: "var(--shadow-sm)" }}>+ Call to action</button>
-                  {/* Outline */}
-                  <button style={{ height: 36, padding: "0 16px", borderRadius: "var(--radius-md)", border: "1px solid var(--color-interactive-default)", background: "transparent", color: "var(--color-interactive-default)", fontSize: 14, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-base)" }}>+ Call to action</button>
-                  {/* Outline Classic */}
-                  <button style={{ height: 36, padding: "0 16px", borderRadius: "9999px", border: "1px solid var(--color-interactive-default)", background: "transparent", color: "var(--color-interactive-default)", fontSize: 14, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-base)" }}>+ Call to action</button>
-                  {/* Link */}
-                  <button style={{ height: 36, padding: "0 8px", borderRadius: "var(--radius-md)", border: "none", background: "transparent", color: "var(--color-text-interactive,var(--color-interactive-default))", fontSize: 14, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-base)" }}>+ Call to action</button>
-                </div>
-              </div>
+              {(() => {
+                const btn = (label: string, extraStyle: React.CSSProperties = {}) => (
+                  <button style={{
+                    display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8,
+                    padding: "0 16px", height: 40, borderRadius: 12, border: "1px solid transparent",
+                    fontFamily: "var(--font-base)", fontWeight: 500, fontSize: 14, cursor: "pointer",
+                    background: `linear-gradient(var(--color-btn-bg,#1C5EFE),var(--color-btn-bg,#1C5EFE)) padding-box, linear-gradient(135deg,var(--color-btn-border-1,#82A6FE) 0%,var(--color-btn-border-2,#1545BB) 50%,var(--color-btn-border-1,#82A6FE) 100%) border-box`,
+                    color: "var(--color-btn-text,#FDFDFD)",
+                    boxShadow: "0 7px 18px var(--color-btn-shadow,rgba(28,94,254,0.24)), inset 0 2px 4px rgba(255,255,255,0.27), 0 2px 4px rgba(0,0,0,0.25)",
+                    ...extraStyle,
+                  }}>
+                    <span>+</span>{label}
+                  </button>
+                );
 
-              {/* Icon only */}
-              <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: 24, marginBottom: 12 }}>
-                <p style={{ fontSize: 11, color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.06em", margin: "0 0 14px" }}>Icon only</p>
-                <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                  <button style={{ width: 36, height: 36, borderRadius: "var(--radius-md)", border: "none", background: "var(--color-interactive-default)", color: "var(--color-text-on-primary)", fontSize: 16, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-base)", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "var(--shadow-md)" }}>+</button>
-                  <button style={{ width: 36, height: 36, borderRadius: "var(--radius-md)", border: "1px solid var(--color-interactive-default)", background: "transparent", color: "var(--color-interactive-default)", fontSize: 16, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-base)", display: "flex", alignItems: "center", justifyContent: "center" }}>+</button>
-                  <button style={{ width: 36, height: 36, borderRadius: "9999px", border: "1px solid var(--color-interactive-default)", background: "transparent", color: "var(--color-interactive-default)", fontSize: 16, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-base)", display: "flex", alignItems: "center", justifyContent: "center" }}>+</button>
-                  <button style={{ width: 36, height: 36, borderRadius: "var(--radius-md)", border: "none", background: "transparent", color: "var(--color-text-interactive,var(--color-interactive-default))", fontSize: 16, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-base)", display: "flex", alignItems: "center", justifyContent: "center" }}>+</button>
-                </div>
-              </div>
+                return (
+                  <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
 
-              {/* Tailles */}
-              <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: 24, marginBottom: 12 }}>
-                <p style={{ fontSize: 11, color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.06em", margin: "0 0 14px" }}>Tailles</p>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 10, alignItems: "center" }}>
-                  <button style={{ height: 22, padding: "0 8px",  borderRadius: "var(--radius-md)", border: "none", background: "var(--color-interactive-default)", color: "var(--color-text-on-primary)", fontSize: 12, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-base)" }}>XS</button>
-                  <button style={{ height: 28, padding: "0 12px", borderRadius: "var(--radius-md)", border: "none", background: "var(--color-interactive-default)", color: "var(--color-text-on-primary)", fontSize: 14, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-base)" }}>S</button>
-                  <button style={{ height: 36, padding: "0 16px", borderRadius: "var(--radius-md)", border: "none", background: "var(--color-interactive-default)", color: "var(--color-text-on-primary)", fontSize: 16, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-base)" }}>M</button>
-                  <button style={{ height: 44, padding: "0 22px", borderRadius: "var(--radius-md)", border: "none", background: "var(--color-interactive-default)", color: "var(--color-text-on-primary)", fontSize: 16, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-base)" }}>L</button>
-                </div>
-              </div>
+                    {/* Tailles */}
+                    <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: 24 }}>
+                      <p style={{ fontSize: 11, color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.06em", margin: "0 0 16px" }}>Tailles</p>
+                      <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
+                        {[
+                          { label: "XS", h: 24, px: 8,  fs: 12, r: 8  },
+                          { label: "S",  h: 32, px: 12, fs: 14, r: 8  },
+                          { label: "M",  h: 40, px: 16, fs: 16, r: 12 },
+                          { label: "L",  h: 54, px: 24, fs: 16, r: 12 },
+                        ].map(({ label, h, px, fs, r }) => (
+                          <button key={label} style={{
+                            display: "inline-flex", alignItems: "center", gap: 6,
+                            height: h, padding: `0 ${px}px`, borderRadius: r,
+                            border: "1px solid transparent", fontFamily: "var(--font-base)", fontWeight: 500, fontSize: fs, cursor: "pointer",
+                            background: `linear-gradient(var(--color-btn-bg,#1C5EFE),var(--color-btn-bg,#1C5EFE)) padding-box, linear-gradient(135deg,var(--color-btn-border-1,#82A6FE) 0%,var(--color-btn-border-2,#1545BB) 50%,var(--color-btn-border-1,#82A6FE) 100%) border-box`,
+                            color: "var(--color-btn-text,#FDFDFD)",
+                            boxShadow: "0 7px 18px var(--color-btn-shadow,rgba(28,94,254,0.24)), inset 0 2px 4px rgba(255,255,255,0.27), 0 2px 4px rgba(0,0,0,0.25)",
+                          }}>
+                            + {label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
 
-              {/* États */}
-              <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: 24 }}>
-                <p style={{ fontSize: 11, color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.06em", margin: "0 0 14px" }}>États</p>
-                <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-                  <button style={{ height: 36, padding: "0 16px", borderRadius: "var(--radius-md)", border: "none", background: "var(--color-interactive-default)", color: "var(--color-text-on-primary)", fontSize: 14, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-base)", boxShadow: "var(--shadow-md)" }}>Default</button>
-                  <button style={{ height: 36, padding: "0 16px", borderRadius: "var(--radius-md)", border: "none", background: "var(--color-interactive-hover,#1545BB)", color: "var(--color-text-on-primary)", fontSize: 14, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-base)" }}>Hover</button>
-                  <button style={{ height: 36, padding: "0 16px", borderRadius: "var(--radius-md)", border: "none", background: "var(--color-interactive-active,#10358F)", color: "var(--color-text-on-primary)", fontSize: 14, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-base)" }}>Pressed</button>
-                  <button style={{ height: 36, padding: "0 16px", borderRadius: "var(--radius-md)", border: "2px solid var(--color-interactive-default)", background: "var(--color-interactive-default)", color: "var(--color-text-on-primary)", fontSize: 14, fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-base)", outline: "3px solid var(--focus-ring-color)", outlineOffset: 2 }}>Focus</button>
-                  <button disabled style={{ height: 36, padding: "0 16px", borderRadius: "var(--radius-md)", border: "none", background: "var(--color-interactive-default)", color: "var(--color-text-on-primary)", fontSize: 14, fontWeight: 500, cursor: "not-allowed", fontFamily: "var(--font-base)", opacity: 0.4 }}>Disabled</button>
-                </div>
-              </div>
+                    {/* États */}
+                    <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: 24 }}>
+                      <p style={{ fontSize: 11, color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.06em", margin: "0 0 16px" }}>États</p>
+                      <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
+                        {btn("Default")}
+                        {btn("Hover",   { background: `linear-gradient(var(--color-btn-bg-hover,#123284),var(--color-btn-bg-hover,#123284)) padding-box, linear-gradient(135deg,var(--color-btn-border-1,#82A6FE) 0%,var(--color-btn-border-2,#1545BB) 50%,var(--color-btn-border-1,#82A6FE) 100%) border-box` })}
+                        {btn("Pressed", { background: `linear-gradient(var(--color-btn-bg-pressed,#0B2165),var(--color-btn-bg-pressed,#0B2165)) padding-box, linear-gradient(135deg,var(--color-btn-border-1,#82A6FE) 0%,var(--color-btn-border-2,#1545BB) 50%,var(--color-btn-border-1,#82A6FE) 100%) border-box`, transform: "translateY(1px)" })}
+                        {btn("Focus",   { outline: "3px solid var(--focus-ring-color,rgba(28,94,254,0.4))", outlineOffset: 2 } as any)}
+                        <button disabled style={{
+                          display: "inline-flex", alignItems: "center", gap: 8, padding: "0 16px", height: 40, borderRadius: 12, border: "1px solid transparent",
+                          fontFamily: "var(--font-base)", fontWeight: 500, fontSize: 14, cursor: "not-allowed",
+                          background: `linear-gradient(var(--color-btn-bg-disabled,#D8D8E1),var(--color-btn-bg-disabled,#D8D8E1)) padding-box, linear-gradient(var(--color-btn-bg-disabled,#D8D8E1),var(--color-btn-bg-disabled,#D8D8E1)) border-box`,
+                          color: "var(--color-text-disabled,#A9A9BD)", opacity: 0.4, boxShadow: "none",
+                        }}>+ Disabled</button>
+                      </div>
+                    </div>
+
+                    {/* Icon only */}
+                    <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: 24 }}>
+                      <p style={{ fontSize: 11, color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.06em", margin: "0 0 16px" }}>Icon only</p>
+                      <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+                        {[
+                          { size: 24, fs: 14, r: 8,  label: "XS" },
+                          { size: 32, fs: 16, r: 8,  label: "S"  },
+                          { size: 40, fs: 18, r: 12, label: "M"  },
+                          { size: 54, fs: 20, r: 12, label: "L"  },
+                        ].map(({ size, fs, r, label }) => (
+                          <button key={label} title={label} style={{
+                            width: size, height: size, padding: 0, borderRadius: r,
+                            border: "1px solid transparent", fontFamily: "var(--font-base)", fontSize: fs, cursor: "pointer",
+                            display: "flex", alignItems: "center", justifyContent: "center",
+                            background: `linear-gradient(var(--color-btn-bg,#1C5EFE),var(--color-btn-bg,#1C5EFE)) padding-box, linear-gradient(135deg,var(--color-btn-border-1,#82A6FE) 0%,var(--color-btn-border-2,#1545BB) 50%,var(--color-btn-border-1,#82A6FE) 100%) border-box`,
+                            color: "var(--color-btn-text,#FDFDFD)",
+                            boxShadow: "0 7px 18px var(--color-btn-shadow,rgba(28,94,254,0.24)), inset 0 2px 4px rgba(255,255,255,0.27), 0 2px 4px rgba(0,0,0,0.25)",
+                          }}>+</button>
+                        ))}
+                      </div>
+                    </div>
+
+                  </div>
+                );
+              })()}
             </section>
 
             {/* ── INPUT ── */}

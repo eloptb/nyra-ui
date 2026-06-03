@@ -124,4 +124,17 @@
 
   --gradient-brand: linear-gradient(135deg, #AA2B1D, #EC6A58);
   --gradient-primary: linear-gradient(135deg, #EDD2D0, #AA2B1D);
+
+/* BUTTON TOKENS */
+  --color-btn-bg:              #AA2B1D;   /* button-color-main = primary-60 RW */
+  --color-btn-bg-disabled:     #D8D8E1;
+  --color-btn-text:            #FDFDFD;
+  --color-btn-icon:            #FDFDFD;
+  --color-btn-text-link:       #AA2B1D;
+  --color-btn-border-1:        #D08A83;   /* primary-50 RW */
+  --color-btn-border-2:        #792016;   /* primary-70 RW */
+  --color-btn-shadow:          rgba(170, 43, 29, 0.24);
+  --color-btn-hover-overlay:   rgba(7, 5, 10, 0.50);
+  --color-btn-bg-hover:        #5C1810;
+  --color-btn-bg-pressed:      #3D100A;
 }

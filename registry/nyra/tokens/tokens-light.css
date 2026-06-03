@@ -130,4 +130,29 @@
   ---------------------------------------------------------- */
   --gradient-brand: linear-gradient(135deg, #1C5EFE, #EF476F);
   --gradient-primary: linear-gradient(135deg, #CFDDFF, #1C5EFE);
+
+  /* ----------------------------------------------------------
+     BUTTON TOKENS (Figma · tokens/Buttons)
+  ---------------------------------------------------------- */
+  /* Fond principal du bouton Default */
+  --color-btn-bg:              #1C5EFE;   /* button-color-main = primary-60 */
+  /* Fond désactivé */
+  --color-btn-bg-disabled:     #D8D8E1;   /* button-color-disabled = grey-30 */
+  /* Texte & icône sur fond primary */
+  --color-btn-text:            #FDFDFD;   /* text-color-on-primary */
+  --color-btn-icon:            #FDFDFD;   /* icon-color-on-primary */
+  /* Texte du bouton texte / link */
+  --color-btn-text-link:       #1C5EFE;   /* text-button-color-main = primary-60 */
+  /* Bordure gradient (stop 1 et 2) */
+  --color-btn-border-1:        #82A6FE;   /* border-button-gradient-01 = primary-50 */
+  --color-btn-border-2:        #1545BB;   /* border-button-gradient-02 = primary-70 */
+  /* Ombre portée du bouton */
+  --color-btn-shadow:          rgba(28, 94, 254, 0.24);  /* button-active-drop-shadow-color */
+  /* Overlay hover sur fond primary */
+  --color-btn-hover-overlay:   rgba(7, 5, 10, 0.50);     /* state-on-primary-color-hover */
+  /* Overlay pressed sur fond primary */
+  --color-btn-press-overlay:   rgba(7, 5, 10, 0.70);
+  /* Couleur hover pour bouton avec bg calculée (hover overlay sur primary-60) */
+  --color-btn-bg-hover:        #123284;   /* result of rgba(7,5,10,0.5) over #1C5EFE */
+  --color-btn-bg-pressed:      #0B2165;   /* result of rgba(7,5,10,0.7) over #1C5EFE */
 }

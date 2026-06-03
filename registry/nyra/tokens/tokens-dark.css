@@ -118,4 +118,17 @@
 
   --gradient-brand: linear-gradient(135deg, #1C5EFE, #EF476F);
   --gradient-primary: linear-gradient(135deg, #0D2C79, #1C5EFE);
+
+/* BUTTON TOKENS */
+  --color-btn-bg:              #1C5EFE;
+  --color-btn-bg-disabled:     #474761;   /* button-color-disabled dark = grey-80 */
+  --color-btn-text:            #FDFDFD;
+  --color-btn-icon:            #FDFDFD;
+  --color-btn-text-link:       #FDFDFD;   /* text-button-color-main dark = Light */
+  --color-btn-border-1:        #82A6FE;
+  --color-btn-border-2:        #A4BFFF;   /* border-button-gradient-02 dark = primary-40 */
+  --color-btn-shadow:          rgba(28, 94, 254, 0.34);
+  --color-btn-hover-overlay:   rgba(7, 5, 10, 0.50);
+  --color-btn-bg-hover:        #123284;
+  --color-btn-bg-pressed:      #0B2165;
 }

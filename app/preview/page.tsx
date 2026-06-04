@@ -4,6 +4,209 @@ import { Button } from "@/registry/nyra/button/button";
 
 type Page = "button" | "input" | "select" | "checkbox" | "couleurs" | "typographie";
 
+// ── Helpers shared styles ───────────────────────────────────
+const H2: React.CSSProperties = {
+  fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em",
+  textTransform: "uppercase" as const, color: "var(--color-text-muted)",
+  marginBottom: 16, paddingBottom: 12, borderBottom: "1px solid var(--color-border-default)",
+};
+const Card: React.CSSProperties = {
+  background: "var(--color-bg-raised)", borderRadius: 12,
+  border: "1px solid var(--color-border-default)", padding: 20,
+};
+const SubLabel: React.CSSProperties = {
+  fontSize: 11, color: "var(--color-text-muted)",
+  textTransform: "uppercase" as const, letterSpacing: "0.07em", margin: "0 0 14px",
+};
+
+// ── ButtonPage ──────────────────────────────────────────────
+function ButtonPage() {
+  const [open, setOpen] = useState<string | null>(null);
+  const toggle = (id: string) => setOpen(o => o === id ? null : id);
+
+  const TYPES = [
+    {
+      id: "default",
+      label: "Default",
+      description: "Action principale — fond filled, bordure gradient, triple ombre",
+      preview: (
+        <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" as const }}>
+          <Button size="m" leftIcon={<span>+</span>}>Call to action</Button>
+          <Button variant="icon-primary" size="m" icon={<span>+</span>} aria-label="Ajouter" />
+        </div>
+      ),
+      detail: <DefaultDetail />,
+    },
+    {
+      id: "outline",
+      label: "Outline",
+      description: "Action secondaire — fond transparent, bordure solide, sans ombre",
+      preview: (
+        <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" as const }}>
+          <Button variant="outline" size="m" leftIcon={<span>+</span>}>Call to action</Button>
+          <Button variant="icon-outline" size="m" icon={<span>+</span>} aria-label="Ajouter" />
+        </div>
+      ),
+      detail: <OutlineDetail />,
+    },
+  ];
+
+  return (
+    <section style={{ marginBottom: 56 }}>
+      <h1 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 18, color: "var(--color-text-primary)", margin: "0 0 4px" }}>Button</h1>
+      <p style={{ fontSize: 13, color: "var(--color-text-muted)", margin: "0 0 32px" }}>Source Figma · node 133:4518 · Hover/click/focus pour tester les états</p>
+
+      {/* ── OVERVIEW ── */}
+      <div style={{ marginBottom: 32 }}>
+        <p style={H2}>Overview</p>
+        <div style={{ background: "var(--color-bg-surface)", borderRadius: 12, border: "1px solid var(--color-border-default)", padding: "32px 24px", display: "flex", gap: 32, flexWrap: "wrap" as const, alignItems: "center" }}>
+          {TYPES.map(t => (
+            <div key={t.id} style={{ display: "flex", flexDirection: "column" as const, gap: 10 }}>
+              <span style={{ fontSize: 11, color: "var(--color-text-muted)", textTransform: "uppercase" as const, letterSpacing: "0.08em" }}>{t.label}</span>
+              {t.preview}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── ACCORDÉON PAR TYPE ── */}
+      <div>
+        <p style={H2}>Détail par type</p>
+        <div style={{ display: "flex", flexDirection: "column" as const, gap: 8 }}>
+          {TYPES.map(t => {
+            const isOpen = open === t.id;
+            return (
+              <div key={t.id} style={{ borderRadius: 12, border: "1px solid var(--color-border-default)", overflow: "hidden" }}>
+                {/* Header accordéon */}
+                <button
+                  onClick={() => toggle(t.id)}
+                  style={{
+                    width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
+                    padding: "16px 20px", background: isOpen ? "var(--color-interactive-subtle, #E8EFFF)" : "var(--color-bg-raised)",
+                    border: "none", cursor: "pointer", fontFamily: "var(--font-base)", transition: "background 120ms ease",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                    <span style={{ fontSize: 14, fontWeight: 500, color: "var(--color-text-primary)" }}>{t.label}</span>
+                    <span style={{ fontSize: 12, color: "var(--color-text-muted)" }}>{t.description}</span>
+                  </div>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                    style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 200ms ease", flexShrink: 0 }}>
+                    <path d="M4 6L8 10L12 6" stroke="var(--color-text-muted)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
+
+                {/* Contenu accordéon */}
+                {isOpen && (
+                  <div style={{ padding: "20px", background: "var(--color-bg-raised)", borderTop: "1px solid var(--color-border-default)" }}>
+                    {t.detail}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── Default detail ──────────────────────────────────────────
+function DefaultDetail() {
+  const gradBg = `linear-gradient(var(--color-btn-bg,#1C5EFE),var(--color-btn-bg,#1C5EFE)) padding-box, linear-gradient(135deg,var(--color-btn-border-1,#82A6FE) 0%,var(--color-btn-border-2,#1545BB) 50%,var(--color-btn-border-1,#82A6FE) 100%) border-box`;
+  const shadow = "0 7px 18px var(--color-btn-shadow,rgba(28,94,254,0.24)), inset 0 2px 4px rgba(255,255,255,0.27), 0 2px 4px rgba(0,0,0,0.25)";
+  const base: React.CSSProperties = { display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, borderRadius: 12, border: "1px solid transparent", fontFamily: "var(--font-base)", fontWeight: 500, cursor: "pointer", background: gradBg, color: "var(--color-btn-text,#FDFDFD)", boxShadow: shadow };
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column" as const, gap: 16 }}>
+      {/* States */}
+      <div style={Card}>
+        <p style={SubLabel}>États</p>
+        <div style={{ display: "flex", gap: 10, flexWrap: "wrap" as const, alignItems: "center" }}>
+          <Button size="m" leftIcon={<span>+</span>}>Default</Button>
+          <button style={{ ...base, padding: "0 16px", height: 40, fontSize: 14, background: `linear-gradient(var(--color-btn-bg-hover,#123284),var(--color-btn-bg-hover,#123284)) padding-box, linear-gradient(135deg,var(--color-btn-border-1,#82A6FE) 0%,var(--color-btn-border-2,#1545BB) 50%,var(--color-btn-border-1,#82A6FE) 100%) border-box` }}>+ Hover</button>
+          <button style={{ ...base, padding: "0 16px", height: 40, fontSize: 14, background: `linear-gradient(var(--color-btn-bg-pressed,#0B2165),var(--color-btn-bg-pressed,#0B2165)) padding-box, linear-gradient(135deg,var(--color-btn-border-1,#82A6FE) 0%,var(--color-btn-border-2,#1545BB) 50%,var(--color-btn-border-1,#82A6FE) 100%) border-box`, transform: "translateY(1px)" }}>+ Pressed</button>
+          <button style={{ ...base, padding: "0 16px", height: 40, fontSize: 14, outline: "3px solid var(--focus-ring-color,rgba(28,94,254,0.4))", outlineOffset: 2 }}>+ Focus</button>
+          <Button size="m" disabled leftIcon={<span>+</span>}>Disabled</Button>
+        </div>
+      </div>
+      {/* Sizes */}
+      <div style={Card}>
+        <p style={SubLabel}>Tailles</p>
+        <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" as const }}>
+          {([["XS",24,8,12,8],["S",32,12,14,8],["M",40,16,16,12],["L",54,24,16,12]] as [string,number,number,number,number][]).map(([label,h,px,fs,r]) => (
+            <button key={label} style={{ ...base, height: h, padding: `0 ${px}px`, fontSize: fs, borderRadius: r }}>+ {label}</button>
+          ))}
+        </div>
+      </div>
+      {/* Icon only */}
+      <div style={Card}>
+        <p style={SubLabel}>Icon only</p>
+        <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+          {([["XS",24,14,8],["S",32,16,8],["M",40,18,12],["L",54,20,12]] as [string,number,number,number][]).map(([label,size,fs,r]) => (
+            <button key={label} title={String(label)} style={{ ...base, width: size, height: size, padding: 0, fontSize: fs, borderRadius: r }}>+</button>
+          ))}
+        </div>
+      </div>
+      {/* Disabled */}
+      <div style={Card}>
+        <p style={SubLabel}>Disabled</p>
+        <div style={{ display: "flex", gap: 12, flexWrap: "wrap" as const }}>
+          <Button size="m" disabled leftIcon={<span>+</span>}>Call to action</Button>
+          <Button variant="icon-primary" size="m" disabled icon={<span>+</span>} aria-label="Ajouter" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Outline detail ──────────────────────────────────────────
+function OutlineDetail() {
+  const base: React.CSSProperties = { display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, borderRadius: 12, border: "1px solid var(--color-interactive-default,#1C5EFE)", background: "transparent", fontFamily: "var(--font-base)", fontWeight: 500, cursor: "pointer", color: "var(--color-btn-bg,#1C5EFE)", boxShadow: "none" };
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column" as const, gap: 16 }}>
+      {/* States */}
+      <div style={Card}>
+        <p style={SubLabel}>États</p>
+        <div style={{ display: "flex", gap: 10, flexWrap: "wrap" as const, alignItems: "center" }}>
+          <Button variant="outline" size="m" leftIcon={<span>+</span>}>Default</Button>
+          <button style={{ ...base, padding: "0 16px", height: 40, fontSize: 14, background: "var(--color-btn-outline-hover,rgba(28,94,254,0.08))" }}>+ Hover</button>
+          <button style={{ ...base, padding: "0 16px", height: 40, fontSize: 14, background: "var(--color-btn-outline-pressed,rgba(28,94,254,0.14))", transform: "translateY(1px)" }}>+ Pressed</button>
+          <button style={{ ...base, padding: "0 16px", height: 40, fontSize: 14, outline: "3px solid var(--focus-ring-color,rgba(28,94,254,0.4))", outlineOffset: 2 }}>+ Focus</button>
+          <Button variant="outline" size="m" disabled leftIcon={<span>+</span>}>Disabled</Button>
+        </div>
+      </div>
+      {/* Sizes */}
+      <div style={Card}>
+        <p style={SubLabel}>Tailles</p>
+        <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" as const }}>
+          {([["XS",24,8,12,8],["S",32,12,14,8],["M",40,16,16,12],["L",54,24,16,12]] as [string,number,number,number,number][]).map(([label,h,px,fs,r]) => (
+            <button key={label} style={{ ...base, height: h, padding: `0 ${px}px`, fontSize: fs, borderRadius: r }}>+ {label}</button>
+          ))}
+        </div>
+      </div>
+      {/* Icon only */}
+      <div style={Card}>
+        <p style={SubLabel}>Icon only</p>
+        <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+          {([["XS",24,14,8],["S",32,16,8],["M",40,18,12],["L",54,20,12]] as [string,number,number,number][]).map(([label,size,fs,r]) => (
+            <button key={label} title={String(label)} style={{ ...base, width: size, height: size, padding: 0, fontSize: fs, borderRadius: r }}>+</button>
+          ))}
+        </div>
+      </div>
+      {/* Disabled */}
+      <div style={Card}>
+        <p style={SubLabel}>Disabled</p>
+        <div style={{ display: "flex", gap: 12, flexWrap: "wrap" as const }}>
+          <Button variant="outline" size="m" disabled leftIcon={<span>+</span>}>Call to action</Button>
+          <Button variant="icon-outline" size="m" disabled icon={<span>+</span>} aria-label="Ajouter" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 type Theme = "light" | "dark" | "report-writer" | "four-js" | "genero-intelligence-light" | "genero-intelligence-dark";
 
 const THEMES: { id: Theme; label: string; font: string; color: string }[] = [
@@ -230,156 +433,8 @@ export default function Preview() {
           {/* CONTENT */}
           <main style={{ padding: "40px 48px", maxWidth: 880, overflowY: "auto", height: "calc(100vh - 56px)" }}>
 
-            {/* ── BUTTON PAGE : Overview + détails ── */}
-            {page === "button" && <section id="button" style={{ marginBottom: 56 }}>
-              <h1 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 18, color: "var(--color-text-primary)", margin: "0 0 4px" }}>Button</h1>
-              <p style={{ fontSize: 13, color: "var(--color-text-muted)", margin: "0 0 32px" }}>Type: Default · Source Figma 133:4518</p>
-
-              {/* ── OVERVIEW ── */}
-            <section style={{ marginBottom: 32 }}>
-              <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid var(--color-border-default)" }}>Overview</h2>
-
-              {/* Hero interactif */}
-              <div style={{ background: "var(--color-bg-surface)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: "48px 32px", display: "flex", flexDirection: "column", alignItems: "center", gap: 32, marginBottom: 24 }}>
-                <div style={{ textAlign: "center" }}>
-                  <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", margin: "0 0 8px" }}>Button · Default · M</p>
-                  <p style={{ fontSize: 13, color: "var(--color-text-muted)", margin: 0 }}>Hover, click, focus avec Tab pour tester les états</p>
-                </div>
-
-                {/* Boutons interactifs — vrais composants avec CSS injection */}
-                <div style={{ display: "flex", flexDirection: "column", gap: 24, width: "100%", alignItems: "center" }}>
-
-                  {/* Default */}
-                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
-                    <span style={{ fontSize: 11, color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.08em" }}>Default</span>
-                    <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-                      <Button size="m" leftIcon={<span>+</span>}>Call to action</Button>
-                      <Button variant="icon-primary" size="m" icon={<span>+</span>} aria-label="Ajouter" />
-                    </div>
-                  </div>
-
-                  <div style={{ width: "100%", height: 1, background: "var(--color-border-default)" }} />
-
-                  {/* Outline */}
-                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
-                    <span style={{ fontSize: 11, color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.08em" }}>Outline</span>
-                    <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-                      <Button variant="outline" size="m" leftIcon={<span>+</span>}>Call to action</Button>
-                      <Button variant="icon-outline" size="m" icon={<span>+</span>} aria-label="Ajouter" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Légende */}
-                <div style={{ display: "flex", gap: 20, fontSize: 12, color: "var(--color-text-muted)", flexWrap: "wrap", justifyContent: "center" }}>
-                  {["Default", "Hover", "Pressed", "Focus", "Disabled"].map(label => (
-                    <span key={label}>{label}</span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Disabled */}
-              <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: "20px 28px", display: "flex", alignItems: "center", gap: 24 }}>
-                <p style={{ fontSize: 11, color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.08em", margin: 0, flexShrink: 0 }}>Disabled</p>
-                <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-                  <Button size="m" disabled leftIcon={<span>+</span>}>Call to action</Button>
-                  <Button variant="icon-primary" size="m" disabled icon={<span>+</span>} aria-label="Ajouter" />
-                  <Button variant="outline" size="m" disabled leftIcon={<span>+</span>}>Call to action</Button>
-                  <Button variant="icon-outline" size="m" disabled icon={<span>+</span>} aria-label="Ajouter" />
-                </div>
-              </div>
-            </section>
-
-              {/* ── DÉTAILS ── */}
-            <section style={{ marginBottom: 0 }}>
-              <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid var(--color-border-default)" }}>Détails</h2>
-
-              {(() => {
-                const btn = (label: string, extraStyle: React.CSSProperties = {}) => (
-                  <button style={{
-                    display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8,
-                    padding: "0 16px", height: 40, borderRadius: 12, border: "1px solid transparent",
-                    fontFamily: "var(--font-base)", fontWeight: 500, fontSize: 14, cursor: "pointer",
-                    background: `linear-gradient(var(--color-btn-bg,#1C5EFE),var(--color-btn-bg,#1C5EFE)) padding-box, linear-gradient(135deg,var(--color-btn-border-1,#82A6FE) 0%,var(--color-btn-border-2,#1545BB) 50%,var(--color-btn-border-1,#82A6FE) 100%) border-box`,
-                    color: "var(--color-btn-text,#FDFDFD)",
-                    boxShadow: "0 7px 18px var(--color-btn-shadow,rgba(28,94,254,0.24)), inset 0 2px 4px rgba(255,255,255,0.27), 0 2px 4px rgba(0,0,0,0.25)",
-                    ...extraStyle,
-                  }}>
-                    <span>+</span>{label}
-                  </button>
-                );
-
-                return (
-                  <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-
-                    {/* Tailles */}
-                    <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: 24 }}>
-                      <p style={{ fontSize: 11, color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.06em", margin: "0 0 16px" }}>Tailles</p>
-                      <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
-                        {[
-                          { label: "XS", h: 24, px: 8,  fs: 12, r: 8  },
-                          { label: "S",  h: 32, px: 12, fs: 14, r: 8  },
-                          { label: "M",  h: 40, px: 16, fs: 16, r: 12 },
-                          { label: "L",  h: 54, px: 24, fs: 16, r: 12 },
-                        ].map(({ label, h, px, fs, r }) => (
-                          <button key={label} style={{
-                            display: "inline-flex", alignItems: "center", gap: 6,
-                            height: h, padding: `0 ${px}px`, borderRadius: r,
-                            border: "1px solid transparent", fontFamily: "var(--font-base)", fontWeight: 500, fontSize: fs, cursor: "pointer",
-                            background: `linear-gradient(var(--color-btn-bg,#1C5EFE),var(--color-btn-bg,#1C5EFE)) padding-box, linear-gradient(135deg,var(--color-btn-border-1,#82A6FE) 0%,var(--color-btn-border-2,#1545BB) 50%,var(--color-btn-border-1,#82A6FE) 100%) border-box`,
-                            color: "var(--color-btn-text,#FDFDFD)",
-                            boxShadow: "0 7px 18px var(--color-btn-shadow,rgba(28,94,254,0.24)), inset 0 2px 4px rgba(255,255,255,0.27), 0 2px 4px rgba(0,0,0,0.25)",
-                          }}>
-                            + {label}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* États */}
-                    <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: 24 }}>
-                      <p style={{ fontSize: 11, color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.06em", margin: "0 0 16px" }}>États</p>
-                      <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
-                        {btn("Default")}
-                        {btn("Hover",   { background: `linear-gradient(var(--color-btn-bg-hover,#123284),var(--color-btn-bg-hover,#123284)) padding-box, linear-gradient(135deg,var(--color-btn-border-1,#82A6FE) 0%,var(--color-btn-border-2,#1545BB) 50%,var(--color-btn-border-1,#82A6FE) 100%) border-box` })}
-                        {btn("Pressed", { background: `linear-gradient(var(--color-btn-bg-pressed,#0B2165),var(--color-btn-bg-pressed,#0B2165)) padding-box, linear-gradient(135deg,var(--color-btn-border-1,#82A6FE) 0%,var(--color-btn-border-2,#1545BB) 50%,var(--color-btn-border-1,#82A6FE) 100%) border-box`, transform: "translateY(1px)" })}
-                        {btn("Focus",   { outline: "3px solid var(--focus-ring-color,rgba(28,94,254,0.4))", outlineOffset: 2 } as any)}
-                        <button disabled style={{
-                          display: "inline-flex", alignItems: "center", gap: 8, padding: "0 16px", height: 40, borderRadius: 12, border: "1px solid transparent",
-                          fontFamily: "var(--font-base)", fontWeight: 500, fontSize: 14, cursor: "not-allowed",
-                          background: `linear-gradient(var(--color-btn-bg-disabled,#D8D8E1),var(--color-btn-bg-disabled,#D8D8E1)) padding-box, linear-gradient(var(--color-btn-bg-disabled,#D8D8E1),var(--color-btn-bg-disabled,#D8D8E1)) border-box`,
-                          color: "var(--color-text-disabled,#A9A9BD)", opacity: 0.4, boxShadow: "none",
-                        }}>+ Disabled</button>
-                      </div>
-                    </div>
-
-                    {/* Icon only */}
-                    <div style={{ background: "var(--color-bg-raised)", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border-default)", padding: 24 }}>
-                      <p style={{ fontSize: 11, color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.06em", margin: "0 0 16px" }}>Icon only</p>
-                      <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                        {[
-                          { size: 24, fs: 14, r: 8,  label: "XS" },
-                          { size: 32, fs: 16, r: 8,  label: "S"  },
-                          { size: 40, fs: 18, r: 12, label: "M"  },
-                          { size: 54, fs: 20, r: 12, label: "L"  },
-                        ].map(({ size, fs, r, label }) => (
-                          <button key={label} title={label} style={{
-                            width: size, height: size, padding: 0, borderRadius: r,
-                            border: "1px solid transparent", fontFamily: "var(--font-base)", fontSize: fs, cursor: "pointer",
-                            display: "flex", alignItems: "center", justifyContent: "center",
-                            background: `linear-gradient(var(--color-btn-bg,#1C5EFE),var(--color-btn-bg,#1C5EFE)) padding-box, linear-gradient(135deg,var(--color-btn-border-1,#82A6FE) 0%,var(--color-btn-border-2,#1545BB) 50%,var(--color-btn-border-1,#82A6FE) 100%) border-box`,
-                            color: "var(--color-btn-text,#FDFDFD)",
-                            boxShadow: "0 7px 18px var(--color-btn-shadow,rgba(28,94,254,0.24)), inset 0 2px 4px rgba(255,255,255,0.27), 0 2px 4px rgba(0,0,0,0.25)",
-                          }}>+</button>
-                        ))}
-                      </div>
-                    </div>
-
-                  </div>
-                );
-              })()}
-            </section>
-            </section>}
+            {/* ── BUTTON PAGE ── */}
+            {page === "button" && <ButtonPage />}
 
             {/* ── INPUT PAGE ── */}
             {page === "input" && <section style={{ marginBottom: 56 }}>

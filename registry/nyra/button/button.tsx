@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 // Button — Nyra UI
 // Source Figma : node 133:4518
 //
-// Variants : default | outline | icon-primary | icon-outline
+// Variants : default | outline | link | icon-primary | icon-outline | icon-link
 // Sizes    : xs | s | m | l
 // States   : default | hover | pressed | focus | disabled
 // ============================================================
@@ -15,12 +15,16 @@ export type ButtonSize = "xs" | "s" | "m" | "l";
 export type ButtonVariant =
   /** Filled — action principale. Fond primary, bordure gradient, triple ombre. */
   | "default"
-  /** Fond transparent, même bordure gradient et ombres que default. Texte primary. */
+  /** Fond transparent, bordure solide 1px, sans ombre. */
   | "outline"
+  /** Texte seul — sans fond, sans bordure, sans ombre. Action tertiaire / liens. */
+  | "link"
   /** Icône seule, style filled (carré). Toujours ajouter aria-label. */
   | "icon-primary"
   /** Icône seule, style outline (carré). Toujours ajouter aria-label. */
-  | "icon-outline";
+  | "icon-outline"
+  /** Icône seule, style link (carré). Toujours ajouter aria-label. */
+  | "icon-link";
 
 export interface ButtonProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type"> {
@@ -163,6 +167,43 @@ const CSS = `
   color: var(--color-text-disabled, #A9A9BD);
   box-shadow: none; opacity: 0.4;
 }
+
+/* ── LINK & ICON-LINK ── */
+/*
+  Specs Figma 177:9010 :
+  - Fill     : aucun (transparent)
+  - Border   : aucune
+  - Effets   : aucune ombre
+  - Padding  : 12px tous côtés (padding-04)
+  - Texte    : text-color-interactive (primary-60 Light, primary-40 Dark)
+  - Hover    : fond rgba(primary, 10%) + underline sur texte
+*/
+.nyra-btn-link, .nyra-btn-icon-link {
+  background: transparent;
+  border: none;
+  color: var(--color-btn-text-link, var(--color-interactive-default, #1C5EFE));
+  box-shadow: none;
+}
+.nyra-btn-link:hover {
+  background: var(--color-btn-outline-hover, rgba(28,94,254,0.08));
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.nyra-btn-icon-link:hover {
+  background: var(--color-btn-outline-hover, rgba(28,94,254,0.08));
+}
+.nyra-btn-link:active, .nyra-btn-icon-link:active {
+  background: var(--color-btn-outline-pressed, rgba(28,94,254,0.14));
+  transform: translateY(1px);
+}
+.nyra-btn-link:focus-visible, .nyra-btn-icon-link:focus-visible {
+  outline: 3px solid var(--focus-ring-color, rgba(28,94,254,0.4));
+  outline-offset: 2px;
+}
+.nyra-btn-link:disabled, .nyra-btn-icon-link:disabled {
+  color: var(--color-text-disabled, #A9A9BD);
+  box-shadow: none; opacity: 0.4;
+}
 `;
 
 function injectStyles() {
@@ -190,7 +231,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
      htmlType = "button", children, className = "", disabled, ...props }, ref) => {
     useEffect(() => { injectStyles(); }, []);
 
-    const iconMode   = variant === "icon-primary" || variant === "icon-outline";
+    const iconMode   = variant === "icon-primary" || variant === "icon-outline" || variant === "icon-link";
     const isDisabled = disabled || loading;
     const spinnerPx  = size === "xs" ? 12 : size === "s" ? 14 : 16;
     const sizeClass  = iconMode ? `nyra-btn-icon-${size}` : `nyra-btn-${size}`;

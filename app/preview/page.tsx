@@ -49,6 +49,18 @@ function ButtonPage() {
       ),
       detail: <OutlineDetail />,
     },
+    {
+      id: "link",
+      label: "Link",
+      description: "Action tertiaire — texte seul, sans fond ni bordure ni ombre",
+      preview: (
+        <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" as const }}>
+          <Button variant="link" size="m" leftIcon={<span>+</span>}>Call to action</Button>
+          <Button variant="icon-link" size="m" icon={<span>+</span>} aria-label="Ajouter" />
+        </div>
+      ),
+      detail: <LinkDetail />,
+    },
   ];
 
   return (
@@ -154,6 +166,54 @@ function DefaultDetail() {
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap" as const }}>
           <Button size="m" disabled leftIcon={<span>+</span>}>Call to action</Button>
           <Button variant="icon-primary" size="m" disabled icon={<span>+</span>} aria-label="Ajouter" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Link detail ─────────────────────────────────────────────
+function LinkDetail() {
+  const base: React.CSSProperties = {
+    display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8,
+    borderRadius: 12, border: "none", background: "transparent",
+    fontFamily: "var(--font-base)", fontWeight: 500, cursor: "pointer",
+    color: "var(--color-btn-text-link, var(--color-interactive-default, #1C5EFE))",
+    boxShadow: "none",
+  };
+  return (
+    <div style={{ display: "flex", flexDirection: "column" as const, gap: 16 }}>
+      <div style={Card}>
+        <p style={SubLabel}>États</p>
+        <div style={{ display: "flex", gap: 10, flexWrap: "wrap" as const, alignItems: "center" }}>
+          <Button variant="link" size="m" leftIcon={<span>+</span>}>Default</Button>
+          <button style={{ ...base, padding: "0 16px", height: 40, fontSize: 14, background: "var(--color-btn-outline-hover,rgba(28,94,254,0.08))", textDecoration: "underline" }}>+ Hover</button>
+          <button style={{ ...base, padding: "0 16px", height: 40, fontSize: 14, background: "var(--color-btn-outline-pressed,rgba(28,94,254,0.14))", transform: "translateY(1px)" }}>+ Pressed</button>
+          <button style={{ ...base, padding: "0 16px", height: 40, fontSize: 14, outline: "3px solid var(--focus-ring-color,rgba(28,94,254,0.4))", outlineOffset: 2 }}>+ Focus</button>
+          <Button variant="link" size="m" disabled leftIcon={<span>+</span>}>Disabled</Button>
+        </div>
+      </div>
+      <div style={Card}>
+        <p style={SubLabel}>Tailles</p>
+        <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" as const }}>
+          {([["XS",24,8,12,8],["S",32,12,14,8],["M",40,16,16,12],["L",54,24,16,12]] as [string,number,number,number,number][]).map(([label,h,px,fs,r]) => (
+            <button key={label} style={{ ...base, height: h, padding: `0 ${px}px`, fontSize: fs, borderRadius: r }}>+ {label}</button>
+          ))}
+        </div>
+      </div>
+      <div style={Card}>
+        <p style={SubLabel}>Icon only</p>
+        <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+          {([["XS",24,14,8],["S",32,16,8],["M",40,18,12],["L",54,20,12]] as [string,number,number,number][]).map(([label,size,fs,r]) => (
+            <button key={label} title={String(label)} style={{ ...base, width: size, height: size, padding: 0, fontSize: fs, borderRadius: r }}>+</button>
+          ))}
+        </div>
+      </div>
+      <div style={Card}>
+        <p style={SubLabel}>Disabled</p>
+        <div style={{ display: "flex", gap: 12, flexWrap: "wrap" as const }}>
+          <Button variant="link" size="m" disabled leftIcon={<span>+</span>}>Call to action</Button>
+          <Button variant="icon-link" size="m" disabled icon={<span>+</span>} aria-label="Ajouter" />
         </div>
       </div>
     </div>
@@ -280,6 +340,7 @@ export default function Preview() {
           --color-btn-shadow: rgba(28,94,254,0.34);
           --color-btn-outline-hover: rgba(28,94,254,0.12);
           --color-btn-outline-pressed: rgba(28,94,254,0.20);
+          --color-btn-text-link: #A4BFFF;
           --color-text-disabled: #474761;
         }
 
@@ -368,6 +429,7 @@ export default function Preview() {
           --color-btn-shadow: rgba(28,94,254,0.34);
           --color-btn-outline-hover: rgba(28,94,254,0.12);
           --color-btn-outline-pressed: rgba(28,94,254,0.20);
+          --color-btn-text-link: #A4BFFF;
           --color-text-disabled: #474761;
         }
       `}</style>

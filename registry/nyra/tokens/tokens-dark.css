@@ -124,7 +124,7 @@
   --color-btn-bg-disabled:     #474761;   /* button-color-disabled dark = grey-80 */
   --color-btn-text:            #FDFDFD;
   --color-btn-icon:            #FDFDFD;
-  --color-btn-text-link:       #FDFDFD;   /* text-button-color-main dark = Light */
+  --color-btn-text-link:        #A4BFFF;   /* text-color-interactive dark = primary-40 */
   --color-btn-border-1:        #82A6FE;
   --color-btn-border-2:        #A4BFFF;   /* border-button-gradient-02 dark = primary-40 */
   --color-btn-shadow:          rgba(28, 94, 254, 0.34);
